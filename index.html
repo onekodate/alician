@@ -45,8 +45,12 @@
 				table-layout:fixed;
 				display:inline-block;
 				font-weight:normal;
+				font-size:13px;
 				margin-left:auto;
 				margin-right:auto;
+			}
+			#credit{
+				text-align: center;
 			}
 		</style>
 	</head>
@@ -100,44 +104,31 @@
 		const start=()=>{
 			elem("name_l").innerHTML=raw.map(val=>"<option value='"+val.name+"'></option>");
 			elem("credit").innerHTML="<tr><th>Song</th><th>Alician</th><th>English</th><th>Japanese</th></tr>"+raw.map(val=>"<tr><td>"+val.name+"</td>"
-				+"<td><a target='_blank' href='"+val.citation.alc+"'>"+val.citation.alc+"</a></td>"
-				+"<td><a target='_blank' href='"+val.citation.eng+"'>"+val.citation.eng+"</a></td>"
-				+"<td><a target='_blank' href='"+val.citation.jpn+"'>"+val.citation.jpn+"</a></td></tr>"
+				+"<td><a target='_blank' href='"+val.origin.alc.url+"'>"+val.origin.alc.text+"</a></td>"
+				+"<td><a target='_blank' href='"+val.origin.eng.url+"'>"+val.origin.eng.text+"</a></td>"
+				+"<td><a target='_blank' href='"+val.origin.jpn.url+"'>"+val.origin.jpn.text+"</a></td></tr>"
 			);
 			elem("alc_l").innerHTML=Array.from(
 				new Set(
 					lyrics.map(val=>val.alc
 						.split(" ")
-							.map(v=>v
-								.replace('"',"")
-								.replace("”","")
-								.replace(/\./g,"")
-								.replace("!","")
-								.replace(",","")
-								.replace("?","")
-								.toLowerCase()
-							)
-						).flat()
-					)
-				).sort()
-				.map(val=>"<option value='"+val+"'></option>");
-				elem("eng_l").innerHTML=Array.from(
+						.map(v=>v.replace(/[\."“”!,?]/g,""))
+					).flat()
+				)
+			).sort()
+			.map(val=>"<option value='"+val+"'></option>");
+			elem("eng_l").innerHTML=Array.from(
 				new Set(
 					lyrics.map(val=>val.eng
 						.split(" ")
-							.map(v=>v
-								.replace('"',"")
-								.replace("”","")
-								.replace(/\./g,"")
-								.replace("!","")
-								.replace(",","")
-								.replace("?","")
-								.toLowerCase()
-							)
-						).flat()
-					)
-				).sort()
-				.map(val=>"<option value='"+val+"'></option>");
+						.map(v=>v
+							.replace(/[\."“”!,?]/g,"")
+							.toLowerCase()
+						)
+					).flat()
+				)
+			).sort()
+			.map(val=>"<option value='"+val+"'></option>");
 		};
 		const raw=[{
 			name:"▷NEW GAME",
@@ -283,7 +274,7 @@
 					'"Lend Lend Cloud Skeem?"',
 					'"Kulu Nai Rait Heiliam Tuklt"',
 					'"Lend Cloud Skeem Gete Liumd?"',
-					'"Kulu Nai Rait Rait Rait Rait Rait Rait Rait Heiliam Tuikt"',
+					'"Kulu Nai Rait Rait Rait Rait Rait Rait Rait Heiliam Tuklt"',
 					'"Lend Cloud Skeem Gete Liumd?"',
 					'"Kulu Nai Rait Heiliam Tuklt"',
 					'"Lend Cloud Skeem Skeem Skeem Skeem Skeem Skeem Skeem Gete Liumd?"',
@@ -301,10 +292,19 @@
 					"Iequim Lef Fea Edal, Mill Fellito end Fellito...",
 				],
 			},
-			citation:{
-				eng:"https://alice-orchestra.com/NEWGAME",
-				jpn:"https://alice-orchestra.jp/NEWGAME",
-				alc:"https://privatter.net/p/8172202",
+			origin:{
+				eng:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.com/NEWGAME",
+				},
+				jpn:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.jp/NEWGAME",
+				},
+				alc:{
+					text:"Mono.T様 Privatter",
+					url:"https://privatter.net/p/8172202",
+				},
 			},
 		},{
 			name:"Fushigi Chan",
@@ -321,12 +321,10 @@
 					"How ridiculous",
 
 					"Hyenas in human skin, singing hymns, intoxicated by their own majesty",
-					"“Give me more”",
-					"“it’s not enough.”",
+					"“Give me more, it’s not enough.”",
 					"A pile of corpses in their dwelling",
 					"A bloody dinner party with yesterday’s friends",
-					"“Give me more”",
-					"“it’s not enough.”",
+					"“Give me more, it’s not enough.”",
 
 					"Throwing the dice to the universe",
 					"throwing the dice to the universe",
@@ -363,12 +361,10 @@
 					"なんて滑稽だ",
 
 					"人の皮を被ったハイエナ達 讃美歌を歌い 威光に酔いしれる",
-					"“もっと欲しい”",
-					"“まだ足りないよ”",
+					"“もっと欲しい まだ足りないよ”",
 					"棲みかには骸の山",
 					"昨日の友と 血まみれの晩餐会",
-					"“もっと欲しい”",
-					"“まだ足りないよ”",
+					"“もっと欲しい まだ足りないよ”",
 
 					"宇宙に賽を投げて",
 					"宇宙に賽を投げて",
@@ -405,12 +401,10 @@
 					"Wilenq Disigalm",
 
 					"Sindip-qls end Wendiq Jered ou Enebis. Seiren Waltisala es Dikzim Lushegand",
-					'"Lidit Meila"',
-					'" Nai Ewgit Koll"',
+					'"Lidit Meila, Nai Ewgit Koll"',
 					"Berte ou Vlikt weil Folsiagolzid.",
 					"Melpisia Efiitlaw ifa Amnist Saray",
-					'"Lidit Meila"',
-					'" Nai Ewgit Koll"',
+					'"Lidit Meila, Nai Ewgit Koll"',
 
 					"Wipt Marla il Paphileeta es",
 					"Wipt Marla il Paphileeta es",
@@ -436,10 +430,19 @@
 					"Wilenq Disigalm",
 				],
 			},
-			citation:{
-				eng:"https://alice-orchestra.com/FushigiChan",
-				jpn:"https://alice-orchestra.jp/FushigiChan",
-				alc:"https://fusetter.com/tw/oxpANLmr",
+			origin:{
+				eng:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.com/FushigiChan",
+				},
+				jpn:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.jp/FushigiChan",
+				},
+				alc:{
+					text:"訳者A様 Fusetter",
+					url:"https://fusetter.com/tw/oxpANLmr",
+				},
 			},
 		},{
 			name:"Kill My Fortune",
@@ -562,10 +565,19 @@
 					"Gout Ticca Mols, Lishe Heimia Crai",
 				],
 			},
-			citation:{
-				eng:"https://alice-orchestra.com/KillMyFortune",
-				jpn:"https://alice-orchestra.jp/KillMyFortune",
-				alc:"https://twitter.com/Somnio10nox/status/1280504019140653056",
+			origin:{
+				eng:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.com/KillMyFortune",
+				},
+				jpn:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.jp/KillMyFortune",
+				},
+				alc:{
+					text:"Mono.T様 Twitter",
+					url:"https://twitter.com/Somnio10nox/status/1280504019140653056",
+				},
 			},
 		},{
 			name:"QUEEN FLY",
@@ -664,24 +676,37 @@
 					"Rie sii",
 				],
 			},
-			citation:{
-				eng:"https://alice-orchestra.com/QUEENFLY",
-				jpn:"https://alice-orchestra.jp/QUEENFLY",
-				alc:"https://privatter.net/p/8162337",
+			origin:{
+				eng:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.com/QUEENFLY",
+				},
+				jpn:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.jp/QUEENFLY",
+				},
+				alc:{
+					text:"Mono.T様 Privatter",
+					url:"https://privatter.net/p/8162337",
+				},
 			},
 		},{
 			name:"Endorphin",
 			lyric:{
 				eng:[
-					"The disconnected brain is drowning in its own dreams",
-					"The disconnected brain is drowning in its own dreams",
+					"The disconnected brain is drowning",
+					"in its own dreams",
+					"The disconnected brain is drowning",
+					"in its own dreams",
 
 					"A whirling lizard passes over me",
 					"In this room, closed up like a capsule, no one can find you anymore",
+
 					"Such a filthy body, just break it",
 					"Pain lets me forget everything",
 					"Draining away the ugly blood",
-					"and pouring a rainbow into it, so now, show me an illusion",
+					"and pouring a rainbow into it,",
+					"so now, show me an illusion",
 
 					"The stairs of the abyss lead to the sky",
 					"Exposed to penetrating stares",
@@ -692,7 +717,9 @@
 					"Sleep on time",
 					"My daily routines",
 					"Always trying to be a good boy",
-					"The disconnected brain is drowning in its own dreams",
+
+					"The disconnected brain is drowning",
+					"in its own dreams",
 
 					"“This is your new family”",
 					"“Thank you for being born”",
@@ -702,15 +729,19 @@
 					"The milk slipped through my body, spilled out, and faded",
 				],
 				jpn:[
-					"切り離された脳は 独り 夢に溺れゆく",
-					"切り離された脳は 独り 夢に溺れゆく",
+					"切り離された脳は 独り",
+					"夢に溺れゆく",
+					"切り離された脳は 独り",
+					"夢に溺れゆく",
 
 					"僕の上を通り過ぎる 渦巻きトカゲ",
 					"カプセルみたいに閉ざされたこの部屋で 君はもう誰にも見つけられない",
+
 					"こんな汚い体 さっさと壊してしまえ",
 					"痛い思いをすれば 全てを忘れられるから",
 					"醜い血液を 奥底まで抜き取って",
-					"虹色を流し込むから ねえ 幻を見せて",
+					"虹色を流し込むから",
+					"ねえ 幻を見せて",
 
 					"奈落の階段は 天まで続いていくよ",
 					"鋭い視線に 晒されながら",
@@ -721,7 +752,9 @@
 					"時間通りに眠って",
 					"毎日のルーティーン",
 					"良い子でいましょう",
-					"切り離された脳は 独り 夢に溺れゆく",
+
+					"切り離された脳は 独り",
+					"夢に溺れゆく",
 
 					"「新しい家族だよ」",
 					"「産まれてきてくれてありがとう」",
@@ -730,12 +763,55 @@
 
 					"ミルクが体をすり抜け 滴り落ち そして消えた",
 				],
-				alc:[],
+				alc:[
+					"Molda end ol Yien Ait a Leimy. Ord Drone.",
+					"Luan a Spai imm Hellm",
+					"Molda end ol Yien Ait a Leimy. Ord Drone.",
+					"Luan a Spai imm Hellm",
+
+					"Dooolas Evilaqq end Briss Arch Zia",
+					"Crai Vell Ignai Yien Ord Blemenes weil Bis Pazz end ol Yien Clooshe Lef Klijia",
+
+					"Yiep Qleea Razzid Oltia Velsiam Coll Falke",
+					"Elize Kulu Dist Ail, Poutie Eem Wondidda Amblait",
+					"Poetolt Slialius Eugidha Melp Elie Piisa",
+					"Elize Tella a Belqua Ilis Fas",
+					"Hiele Phim Pleesa Hellsijma",
+
+					"Staple ou Rowt Ley Klar Elie Ark",
+					"Poetklar Yien Renz il Giila Wipsam",
+					"Liaphi Olizes end Dilem Farp Fei Nai Guit",
+					"Zill Vell Yien Nai Wedikarti Dou",
+
+					"Poetolt Zia Di Zikoiilait",
+					"Poetolt Zia Sween Ifa Zeit",
+					"Bis iy Fikalat ou Yutulsinv ",
+					"Lishe Dal ieq Faress Ame",
+
+					"Molda end ol Yien Ait a Leimy. Ord Drone.",
+					"Luan a Spai imm Hellm",
+
+					'"Gete Melp Saray Lqll"',
+					'"Deank il Crait Rinasijma"',
+					'"Ollenes ob Inay"',
+					'"Hiele, Dilem Ola Filshua, Crain?"',
+
+					"Sipil ol Tollm a Eala Mezart Coll es ol Verse",
+				],
 			},
-			citation:{
-				eng:"https://alice-orchestra.com/Endorphin",
-				jpn:"https://alice-orchestra.jp/Endorphin",
-				alc:"not available",
+			origin:{
+				eng:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.com/Endorphin",
+				},
+				jpn:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.jp/Endorphin",
+				},
+				alc:{
+					text:"公式Youtube",
+					url:"https://www.youtube.com/watch?v=pN5WlE6LxNA",
+				},
 			},
 		},{
 			name:"Children in the Ashes",
@@ -854,10 +930,19 @@
 					"Laiz end Crai Colista Elay Klar Tikelt Xiaoli"				
 				],
 			},
-			citation:{
-				eng:"https://alice-orchestra.com/ChildrenintheAshes",
-				jpn:"https://alice-orchestra.jp/ChildrenintheAshes",
-				alc:"https://twitter.com/Somnio10nox/status/1325444260359856136",
+			origin:{
+				eng:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.com/ChildrenintheAshes",
+				},
+				jpn:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.jp/ChildrenintheAshes",
+				},
+				alc:{
+					text:"Mono.T様 Twitter",
+					url:"https://twitter.com/Somnio10nox/status/1325444260359856136",
+				},
 			},
 		},{
 			name:"Hypnotized",
@@ -941,46 +1026,55 @@
 				alc:[
 					"Iqyul Shellius Entllphi, Ra Noablem Vell Arth Rie",
 					"Iqyul Shellius Entllphi, Ra Cloud Karna Vell Idem Drone",
-					"Yiela Brait Tri Ran-qls",
+					"Yiela Brait Tri Ran qls",
 					"Yiela Millarm Selaf Fiqqlait",
 					"Bisoli Nai Dilem Finz",
 					"Cloud leha Nai Fiela Zel Note",
 
-					"Mii Rinasia *a Canvie lid Dooom Nouche",
+					"Mii Rinasia a Canvie lid Dooom Nouche",
 					"Crai Rinasia a Canvie lid Dooom Nouche osa",
-					"Qleea Yien Ledi Ord Giidu Piito-qls",
+					"Qleea Yien Ledi Ord Giidu Piito qls",
 					"Olzy Kerla forle Sai Elay",
 					"Pray ou Laizcall end Mii Emphi Nai Plau",
 					"Poetolt Yien Dibytt Ord Mijha Brou",
 					"Aka ou Graid Olista a Wely",
 					"Voi Kulu Nai Elifiance Bai",
 
-					"Qleea Yien Ledi Ord Giidu Piito-qls",
+					"Qleea Yien Ledi Ord Giidu Piito qls",
 					"Olzy Kerla forle Sai Elay",
 					"Bis Edal iy Fijnyaditt Haolm",
 					"Slay lar Kerlat iy Ignai Amblu",
 					"Poetolt Womphil a Finz Hedijlyke a Hellm, Bis Ran Yien Amabell Brait Brait",
 
-					"Mii Rinasia Canvie lid Dooom Nouche",
+					"Mii Rinasia a Canvie lid Dooom Nouche",
 					"Crai Rinasia a Canvie lid Dooom Nouche osa",
-					"Qleea Yien Ledi Ord Giidu Piito-qls",
+					"Qleea Yien Ledi Ord Giidu Piito qls",
 					"Olzy Kerla forle Sai Elay",
 					"Pray ou Laizcall end Mii Emphi Nai Plau",
 					"Poetolt Yien Dibytt Ord Mijha Brou",
 					"Aka ou Graid Olista a Wely",
 					"Voi Kulu Nai Elifiance Bai",
 
-					"Qleea Yien Ledi Ord Giidu Piito-qls",
+					"Qleea Yien Ledi Ord Giidu Piito qls",
 					"Olzy Kerla forle Sai Elay",
 					"Bis Edal iy Fijnyaditt Haolm",
 					"Slay lar Kerlat iy Ignai Amblu",
 					"Poetolt Womphil a Finz Hedijlyke a Hellm, Bis Ran Yien Amabell Brait Brait",
 				],
 			},
-			citation:{
-				eng:"https://alice-orchestra.com/Hypnotized",
-				jpn:"https://alice-orchestra.jp/Hypnotized",
-				alc:"https://twitter.com/Somnio10nox/status/1313127712882454529",
+			origin:{
+				eng:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.com/Hypnotized",
+				},
+				jpn:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.jp/Hypnotized",
+				},
+				alc:{
+					text:"Mono.T様 Twitter",
+					url:"https://twitter.com/Somnio10nox/status/1313127712882454529",
+				},
 			},
 		},{
 			name:"Psukhe",
@@ -1067,10 +1161,19 @@
 					"Dou Selaf Yien Garve il Bisoli imm Lootaria",
 				],
 			},
-			citation:{
-				eng:"https://alice-orchestra.com/Psukhe",
-				jpn:"https://alice-orchestra.jp/Psukhe",
-				alc:"https://fusetter.com/tw/oxpANLmr",
+			origin:{
+				eng:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.com/Psukhe",
+				},
+				jpn:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.jp/Psukhe",
+				},
+				alc:{
+					text:"訳者A様 Fusetter",
+					url:"https://fusetter.com/tw/oxpANLmr",
+				},
 			},
 		},{
 			name:"Urxbxrxs",
@@ -1151,8 +1254,8 @@
 				],
 				alc:[
 					"Ullem ou Epkejla Lef Dizzlet. Bipeidit Garei.",
-					"Wendit Lusia Entie Arch Synapse.",
-					"Il Eiti Minelu Sikid Pillusi Olipha en Selanya Helfigi ou Fleekijt",
+					"Wendit Lusia Entie Arch Synapse Il Eiti Minelu",
+					"Sikid Pillusi Olipha en Selanya Helfigi ou Fleekijt",
 					"- Blemyte Holtica iy Xia",
 					"Jay Saut end Mii Iar folme Loqcka Oli",
 					"Mineldari Quop end Acary Seeda",
@@ -1170,8 +1273,8 @@
 					"Hiele Blem iy Crai end Aldaltia Myte Fiakli",
 
 					"Ullem ou Epkejla Lef Dizzlet. Bipeidit Garei.",
-					"Wendit Lusia Entie Arch Synapse.",
-					"Il Eiti Minelu Sikid Pillusi Olipha en Selanya Helfigi ou Fleekijt",
+					"Wendit Lusia Entie Arch Synapse Il Eiti Minelu",
+					"Sikid Pillusi Olipha en Selanya Helfigi ou Fleekijt",
 					"- Blemyte Holtica iy Xia",
 					"Jay Saut end Mii Iar folme Loqcka Oli",
 					"Mineldari Quop end Acary Seeda",
@@ -1187,10 +1290,19 @@
 					"Arte Edlijtu. Arte Heiss. Porsa Tella Aka Prii end Vell Jac a Verse",
 				],
 			},
-			citation:{
-				eng:"https://alice-orchestra.com/Urxbxrxs",
-				jpn:"https://alice-orchestra.jp/Urxbxrxs",
-				alc:"https://fusetter.com/tw/oxpANLmr",
+			origin:{
+				eng:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.com/Urxbxrxs",
+				},
+				jpn:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.jp/Urxbxrxs",
+				},
+				alc:{
+					text:"訳者A様 Fusetter",
+					url:"https://fusetter.com/tw/oxpANLmr",
+				},
 			},
 		},{
 			name:"Popcorns Falling from Heaven",
@@ -1302,9 +1414,9 @@
 
 					"Fevla Crai Qleea Endekta Bai?",
 					"Ra Dou Zillyte Siviliem iy Oltia Flea",
-					"Krey Wizladene-qls end Yien Senju a Telly Eitilait",
+					"Krey Wizladeneqls end Yien Senju a Telly Eitilait",
 					"Rie Darlitte Frait",
-					"Syeilla-qls end iy Vijg lar Qualda weil Ranyastodd",
+					"Syeillaqls end iy Vijg lar Qualda weil Ranyastodd",
 					"Digalm Erlim Zeit Poetklar Efitu Blawpelee",
 
 					"Amabell Fete Yien Fleesie il Doe",
@@ -1313,10 +1425,1627 @@
 					"Elijsjelm Akaite ou Lanai. Melplist ou Syeilla Rie Vell Cliid a Feid",
 				],
 			},
-			citation:{
-				eng:"https://alice-orchestra.com/PopcornsFallingfromHeaven",
-				jpn:"https://alice-orchestra.jp/PopcornsFallingfromHeaven",
-				alc:"https://fusetter.com/tw/oxpANLmr",
+			origin:{
+				eng:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.com/PopcornsFallingfromHeaven",
+				},
+				jpn:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.jp/FushigiChan",
+				},
+				alc:{
+					text:"訳者A様 Fusetter",
+					url:"https://fusetter.com/tw/oxpANLmr",
+				},
+			},
+		},{
+			name:"Maharajah",
+			lyric:{
+				eng:[
+					"Observatory, Sirius, Mirrored Moon",
+					"The phantasmal cat left a lonely smile and vanished away",
+					"Bag, Bare feet, Transparent Funeral",
+					"Welcome to a lonely world",
+					"Everyone had arrived here like you",
+
+					"“Time to tell a fairy tale”",
+					"An open door",
+					"A carafe that falls and breaks",
+
+					"Clad in the fate, Glorify your destiny",
+					"You’re just living now",
+					"You’re the most correct one in this world",
+					"“Give me a break! That’s too much!”",
+					"Blinking light",
+					"Unfinished History",
+					"Untouched Coffee",
+					"“Did you wake up?”",
+					"Here is your night world",
+
+					"Have you forgotten?",
+					"“Time to tell a fairy tale”",
+					"An open door",
+					"A carafe that fell and broke",
+
+					"Ah, it is a fairy tale which I’ve ever heard",
+					"a long long time ago…",
+
+					"Agonizing heart and Golden tears",
+					"Run through the paleography carpet with bare feet",
+					"The magic of absolution and vial of miracle",
+
+					"“You can do it”",
+					"This is the End, End of the endless night",
+					"Look, solitude is here",
+					"Or have you forgotten already?",
+				],
+				jpn:[
+					"天文台 天狼星 鏡像の月",
+					"幻の猫は寂しく微笑んで きえてしまった",
+					"カバン 裸足 透明の葬列",
+					"孤独へようこそ",
+					"誰だってそうやって ここへたどり着いたんだ",
+
+					"“御伽話をしよう”",
+					"開いたままのドア",
+					"落ちて割れるカラフェ",
+
+					"天命を纏い 運命を謳歌せよ",
+					"君は今 生きている",
+					"そして 世界で君が一番正しいんだ",
+					"『ちょっとまってよ そんなのあんまりだよ!』",
+					"明滅する電気",
+					"書きかけの歴史",
+					"置いたままのコーヒー",
+					"“目は覚めたかい”",
+					"ここは君の夜",
+					"もう忘れてしまったかい",
+
+					"“御伽話をしよう”",
+					"開いたままのドア",
+					"落として割れたカラフェ",
+
+					"あぁ それは どこかで聞いた事のある御伽話",
+					"むかし.. むかし…",
+
+					"悩ましき心と 金色の涙",
+					"裸足のまま 古文書の絨毯を駆け抜けろ",
+					"赦しの魔法と 奇跡の小瓶",
+
+					"“君なら きっと大丈夫”",
+					"これが終り 果てなき夜の終り",
+					"ほら 孤独はここにある",
+					"それとも もう忘れてしまったかい",
+				],
+				alc:[
+					"O Skaid Minelu Minelia Oh Di",
+					"Hellm a Cat Galha Sol end Xia Rata",
+					"End Droq Kre Di Escolia",
+					"Alvete Drone a Noll Sar Linq",
+					"end Elay Elie Bis ah",
+
+					'"Hal a Story Oracle"',
+					"end Ani Brait Door",
+					"len Razzle em Carafe",
+
+					"Ah Mail Shiita end a Fete",
+					"ah Cate Aola Crai Lamiy",
+					"end Shelista Hal a Olkei Mii",
+					"『Ay Mii end Harmiy a Xia Trico!』",
+					"Bllink Asta Ya",
+					"Historia ou Leat",
+					"ah Coffee Dist far",
+					'"Age Winde."',
+					"Bis lan la Nouche ou",
+					"Crai Bai Dis Harie Ya",
+
+					'Leste "Hal a Story Oracle"',
+					"end Ani Brait Door",
+					"end Razzle Carafe",
+
+					"Ah Mii o Xia Hellm Story",
+					"Foul Talis end ah Talis..",
+
+					"Mii Herz Jam a Giinia Trane",
+					"Kre end a Lane Ary Wolme ou Historia",
+					"Liix Mage ah end Oracle Flasche",
+
+					'"Mii Harmiy a Crai Shelta Foul"',
+					"Bis Nacc Finz end Nouche ou Finz Dis",
+					"Aihel end Age Alvete a Drone",
+					"Lai La Crai Bai Dis Harie Ya",
+				],
+			},
+			origin:{
+				eng:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.com/Maharajah",
+				},
+				jpn:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.com/ASRB-Lyrics/Maharajah",
+				},
+				alc:{
+					text:"訳者A様 ブログ",
+					url:"http://hon-yaku-a.jugem.jp/?eid=71",
+				},
+			},
+		},{
+			name:"Maze No.9",
+			lyric:{
+				eng:[
+					"Scattered pieces of glass",
+					"dancing pieces",
+
+					"Look, let’s touch their sparkle",
+					"Moon and Sun are my friends from childhood",
+					"I could remember who one true is",
+					"Blue sky",
+					"billions of doors",
+					"we just start from here",
+					"Come on, let’s touch their color",
+					"liberty is here",
+					"Anytime you can go back to the preterite that you want",
+
+					"Sparkling season",
+					"my childhood",
+					"I’ve missed my purpose of life",
+					"But we don’t need that purpose but just stepping forward",
+					"Distant summer scent",
+					"hearts that still grow apart",
+					"All of them are born from the same star",
+					"We don’t need answer, a piece of the world doesn’t have some reasons",
+					"So the least you excuse yourself with smiling when you lose your way",
+					"Abandoned heart will die down someday",
+
+					"Sparkling season, my childhood",
+					"I’ve missed my purpose of life",
+					"But we don’t need that purpose but just stepping forward",
+					"End of long winter",
+					"hearts that aren’t linked by fate",
+					"All of them are born from the same star",
+					"We don’t need answer, a piece of the world doesn’t have some reasons",
+					"So the least you excuse yourself with smiling when you lose your way",
+					"Loveless heart will die down someday",
+				],
+				jpn:[
+					"散らばったガラスの破片",
+					"踊る破片",
+					"ほら、その煌めきに触れてみてよ",
+					"月と太陽と幼馴染",
+					"また 本当の自分を思い出せるような気がする",
+					"青空",
+					"無数の扉",
+					"ここから始まるんだ",
+					"さあ、その色彩に触れてみてよ",
+					"自由はここに在る",
+					"いつだって 帰りたい過去に帰れば良い",
+
+					"眩い季節",
+					"幼い頃",
+					"一体、何のために生きているのか 判らなくなったことがあった",
+					"だけど 人は何のためでもなく ただ歩いてさえすれば良いんだ",
+					"遠い夏の香りも",
+					"すれ違ったままの心も",
+					"同じ星の子 答えなんて要らない",
+					"世界の欠片に理由なんてないよ",
+					"だからせめて 迷った時 自分くらいは 笑って赦してあげてね",
+					"使われなくなった心は いつか 枯れてしまうから",
+
+					"眩い季節",
+					"幼い頃",
+					"一体、何のために生きているのか 判らなくなったことがあった",
+					"だけど 人は何のためでもなく ただ歩いてさえすれば良いんだ",
+					"長かった冬の終わりも",
+					"出逢うことのなかった心も",
+					"同じ星の子 答えなんて要らない",
+					"世界の欠片に理由なんてないよ",
+					"だからせめて 迷った時 自分くらいは 笑って赦してあげてね",
+					"愛されなくなった心は いつか 死んでしまうから",
+				],
+				alc:[
+					"Klatsia Esp ou Ticcla",
+					"Esp ou Lans",
+					"Hiele, Phier San Eclat Xia",
+					"Minelia a Sail end Saray forme Niar Taz",
+					"Eem Lef Karna Harie Sel Miis",
+					"Olm Sarga",
+					"Oulayz Eist",
+					"Frait folme Bis",
+					"Leste, Phier San Xia Fas",
+					"Hait Aihel imm Bis",
+					"Baly Crai ied Fal il Niims Crai Nadi Olis",
+
+					"Fiea Zote",
+					"Ame Taz Graid",
+					"Mii Emphi Miis Nai Prifiel Ofa Arsia ou Ellif",
+					"Gout Ene Nai Dilem Olipha, Cate a Geeg end Lili",
+					"ijsya ou Nita imm Loqcka Graid",
+					"Herz ou Briss a Geeg",
+					"Ame ou Sar Minelu, Nai ieha Way",
+					"Esp ou Shelista Nai Dilem Arsia",
+					"Elize imm Krey Phier Holo Miis imm Aim Taz Madie Ofa Ellif Slay",
+					"Quim Herz Nai Yien Kelletta Lootaria Xia Mane Vel Dialoss",
+
+					"Fiea Zote",
+					"Ame Taz Graid",
+					"Mii Emphi Miis Nai Prifiel Ofa Arsia ou Ellif",
+					"Gout Ene Nai Dilem Olipha, Cate a Geeg end Lili",
+					"Finz ou Vinelo Mii ol Harmiy Loog",
+					"Herz Yiele Awte",
+					"Ame ou Sar Minelu, Nai ieha Way",
+					"Esp ou Shelista Nai Dilem Arsia",
+					"Elize imm Krey Phier Holo Miis imm Aim Taz Madie Ofa Ellif Slay",
+					"Quim Herz Nai Yien Amiy Lootaria Xia Mane Vell Diallif",
+				],
+			},
+			origin:{
+				eng:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.com/MazeNo.9",
+				},
+				jpn:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.com/ASRB-Lyrics/MazeNo.9",
+				},
+				alc:{
+					text:"Mono.T様 Twitter",
+					url:"https://twitter.com/Somnio10nox/status/1268196154820329482",
+				},
+			},
+		},{
+			name:"Thirty Million Persona",
+			lyric:{
+				eng:[
+					"“Oh, you poor thing!” Tears and sighs spilled over",
+					"Cold wind, chilly night, This is a street of liars",
+					"Billions of mere mortals have used up all the warmth there long ago",
+					"Your persona certainly said, “Humans are free”",
+					"I was so disgusted to hear that",
+					"Eventually, if everything can be forgiven, if everything can be forgotten",
+					"This night, too, it’s just like a ruin where there’s nothing even though I open the door",
+					"There’s no point in hiding your face Someone is always watching your true self",
+					"Can you stop doing useless resusorigins?",
+					"In the end, everyone has to get out of here alone",
+					"It’s just like a ruin where there’s nothing even though I open the door",
+					"There’s no point in hiding your true feelings Someone is always noticing your true self",
+					"Can you stop doing useless resusorigins?",
+					"In the end, everyone has to get out of here alone",
+				],
+				jpn:[
+					"“ ああ、可哀そう！” 涙と吐息は零れ落ちた",
+					"冷たい風 寒い夜 ここは嘘つきたちの街",
+					"幾億の空蝉は そこにあった体温なんて とうに使い果たしてしまった",
+					"君のペルソナは確かに云ったね “ 人間は自由だ ” と。",
+					"それを聞いて とってもうんざりしてしまった",
+					"結局 全てが赦されてしまうなら 忘れられてしまうなら",
+					"この夜も まるで 扉を開けたってなにもない 廃墟のように",
+					"顔を隠したって無駄だよ いつだって誰かが見ている 本当の君を",
+					"無駄な蘇生をするのは もう やめてくれないか",
+					"最期はみんな 独りでここから抜け出さなきゃいけない",
+					"まるで 扉を開けたってなにもない 廃墟のように",
+					"本音を隠したって無駄だよ いつだって誰かが気付いてる 本当の君に",
+					"無駄な蘇生をするのは もう やめてくれないか",
+					"最期はみんな 独りでここから抜け出さなきゃいけない",
+				],
+				alc:[
+				],
+			},
+			origin:{
+				eng:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.com/Thirty%20Million%20Persona",
+				},
+				jpn:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.com/ASRB-Lyrics/Thirty%20Million%20Persona",
+				},
+				alc:{
+					text:"Not Available",
+					url:"https://www.youtube.com/watch?v=1hwnjdDnfu4",
+				},
+			},
+		},{
+			name:"Apocalypse",
+			lyric:{
+				eng:[
+					"Run through the evening twilight, to the girls’ crowd",
+					"In the fishy revelation of aeonian silence",
+					"One, two and three apples roll",
+
+					"Run through the evening twilight to the agonizing guy",
+					"In the fishy revelation of aeonian sleep",
+					"One, two and three apples roll",
+
+					"The circus night is really long",
+					"scattered synapse tangle in legs",
+					"And finally peeped end of monodrama in the view after flip",
+
+					"Once I face you",
+					"I forget myself again",
+					"I have to leave right now!",
+					"But can’t find the key of door",
+					"Circus without audience holds up",
+					"and forget where here is again",
+					"I have to go right now!",
+					"Prizing out eyelids of the clown",
+					"by the hand",
+
+					"Trail, Brightness, Redemption, Fate",
+					"Trail, Brightness, Redemption, Fate",
+
+					"Once I face you",
+					"I forget myself again",
+					"I have to leave right now!",
+					"But can’t find the key of door",
+					"Circus without audience holds up",
+					"and forget where here is again",
+					"I have to go right now!",
+					"Prizing out eyelids of the clown",
+					"by the hand",
+				],
+				jpn:[
+					"宵の隙間を駆ける 少女たちの雑踏へ",
+					"永遠の静寂と鈍色の黙示を",
+					"リンゴがひとつ ふたつ みっつ 転がった",
+
+					"宵の隙間を駆ける 懊悩に沈んだ者へ",
+					"永遠の眠りと鈍色の黙示を",
+					"リンゴがひとつ ふたつ みっつ 転がった",
+
+					"サーカスの夜はとても長い夜",
+					"張り巡るシナプスが足に絡みついた",
+					"そして宙返りで臨んだ景色に モノドラマの終りを垣間見る",
+
+					"あなたと目を合わせたら",
+					"また私は私を忘れてしまう",
+					"早く行かなくちゃ！",
+					"でも 扉の鍵が見つからない",
+					"観客の居ないサーカスは続く",
+					"そしてまた ここがどこか忘れてしまう",
+					"早く行かなくちゃ！",
+					"ピエロのまぶたをこじ開けて",
+					"その手で",
+
+					"証跡を 赫赫を 贖罪を 宿運を",
+					"証跡を 赫赫を 贖罪を 宿運を",
+
+					"あなたと目を合わせたら",
+					"また私は私を忘れてしまう",
+					"早く行かなくちゃ！",
+					"でも 扉の鍵が見つからない",
+					"観客の居ないサーカスは続く",
+					"そしてまた ここがどこか忘れてしまう",
+					"早く行かなくちゃ！",
+					"ピエロのまぶたをこじ開けて",
+					"その手で",
+				],
+				alc:[
+					"Selate in ou Lane Lar Alger ou iila",
+					"Lootaria ou Caren Ewol Acary",
+					"Mirya Heil Dro end Di end Tri",
+
+					"Selate in ou Lane Lar Crai Jam Wery",
+					"Lootaria ou Wiina Ewol Acary",
+					"Mirya Hell Dero end Di end Tri",
+
+					"Circus ou Nouche Olis Loog Nouche",
+					"Synapse Astola",
+					"end Ranya Advelses Stei ou Monodrama Finz",
+
+					"Ranya Crai Ran Alan",
+					"end karna Mii Dist end Dist Mii",
+					"Falke Luan!",
+					"Gout Mii Disrait Chail ou Eist",
+					"Circus ou Drone Ley",
+					"end Mii Bis Dist end Dist Mii",
+					"Falke Luan!",
+					"Brait Allss ou Xia Piero",
+					"Haou Crai La Crai",
+
+					"es towai di es crai ni es grei ni lau",
+					"es towai di es crai ni es grei ni lau",
+
+					"Ranya Crai Ran Alan",
+					"end karna Mii Dist end Dist Mii",
+					"Falke Luan!",
+					"Gout Mii Disrait Chail ou Eist",
+					"Circus ou Drone Ley",
+					"end Mii Bis Dist end Dist Mii",
+					"Falke Luan!",
+					"Brait Allss ou Xia Piero",
+					"Haou Crai La Crai",
+				],
+			},
+			origin:{
+				eng:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.com/Apocalypse",
+				},
+				jpn:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.com/ASRB-Lyrics/Apocalypse",
+				},
+				alc:{
+					text:"Mono.T様 Twitter",
+					url:"https://twitter.com/Somnio10nox/status/1299740098376818693",
+				},
+			},
+		},{
+			name:"under wonder nights",
+			lyric:{
+				eng:[
+					"Among the spinning needles",
+					"I can’t remember the myriad voices, words",
+					"I was in a daze after I stop crying",
+					"That crumbled face has gone somewhere",
+					"A lost cat, Beyond of reflection, Scintillating rear",
+					"Do you open the door?",
+					"A long night, A night blooming at the end We snuggle against",
+					"Let’s dance on eternity that never exists",
+					"The bottom is the sea, Flower of the end, I won’t forget you",
+					"Now go to sleep",
+					"A lost cat, Beyond of reflection, Scintillating rear",
+					"Do you open the door?",
+					"A long night, A night blooming at the end We snuggle against",
+					"Let’s dance on eternity that never exists",
+					"The bottom is the sea, Flower of the end, I won’t forget you",
+					"Now go to sleep",
+				],
+				jpn:[
+					"廻る針の間",
+					"無数の声 言葉 何も思い出せないよ",
+					"泣き止んだまま ぼうっとしていた",
+					"あの崩れた顔は どこかへ行ってしまった",
+					"迷った猫 映った先 燦然の背",
+					"その扉を 開けるの？",
+					"永い夜 終わりの果てに咲く夜",
+					"私達は寄り添う 決して存在しない 永遠の上で踊ろう",
+					"底は海 終焉の花 君を忘れない",
+					"さぁ 眠りなさい",
+					"迷った猫 映った先 燦然の背",
+					"その扉を 開けるの？",
+					"永い夜 終わりの果てに咲く夜",
+					"私達は寄り添う 決して存在しない 永遠の上で踊ろう",
+					"底は海 終焉の花 君を忘れない",
+					"さぁ 眠りなさい",
+				],
+				alc:[
+				],
+			},
+			origin:{
+				eng:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.com/under%20wonder%20nights",
+				},
+				jpn:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.com/ASRB-Lyrics/under%20wonder%20nights",
+				},
+				alc:{
+					text:"Not Available",
+					url:"https://www.youtube.com/watch?v=oFvSRXONgEk",
+				},
+			},
+		},{
+			name:"A Little Servant",
+			lyric:{
+				eng:[
+					"Traumerei Traumerei",
+					"Finale only heard by me",
+					"Withered flower",
+					"Red dress",
+					"Big sofa",
+					"Castellated wall",
+					"Iron bars",
+					"Messy closet",
+					"Broken nail",
+
+					"Traumerei Traumerei Oh, Rev. Msgr.",
+					"The song may be without love",
+					"This is for whom?",
+					"Is this world cinematograph?",
+					"You look like monochrome",
+					"A ship floating on illusion",
+					"enormously deep sea",
+					"I really felt like I could come across god",
+					"But there is nothing in illusion anyway despite how strong I wish",
+
+					"Just sink in the bottom depth",
+					"Should I vanish away, not to remember anything",
+					"Just sink in with mystical cluster",
+					"Should I vanish away, as if I wasn’t there from beginning",
+
+					"I can’t stop crying Chagrin is overflowing",
+					"You held out your hand, but is that real?",
+					"I can’t see anything",
+					"I can’t feel anything",
+					"Oh god, please let me go",
+
+					"Pray in the bottom depths,",
+					"as if you stick that heart",
+					"Sleep with mystical cluster,",
+					"as if you escape from eternal nightmare",
+					"Look, the bottom is a sea of tears the never perishing sea",
+				],
+				jpn:[
+					"トロイメライ トロイメライ",
+					"独りだけ聞こえる フィナーレ",
+					"萎れた花",
+					"赤いドレス",
+					"大きなソファ",
+					"城壁",
+					"鉄格子",
+					"散らかったクローゼット",
+					"割れた爪",
+
+					"トロイメライ トロイメライ",
+					"ああ 司祭さま それはきっと 愛のない唄",
+					"誰が為の唄",
+					"世界は映写機？",
+					"あなたはまるで モノクローム",
+					"幻に浮かんだ船",
+					"とっても深い海",
+					"本当は 神様に逢える気がした",
+					"けれど 幻は 結局 がらんどう どれほど 強く 強く 祈ったところでね",
+
+					"深淵の底へ沈んでしまえ",
+					"何も思い出せないように 消え去ってしまおうか",
+					"幽魂を抱いて沈んでしまえ",
+					"まるで 最初から居なかったみたいに 消え去ってしまおうか",
+
+					"泪が止まらないよ 悔しさが滲む",
+					"差し出した その手は 本物なの？",
+					"何も 見えない",
+					"何も 判らない",
+					"神様 もう離してよ",
+
+					"深淵の底で 祈り賜え",
+					"かの心臓を 突き刺すように",
+					"幽魂を抱いて 眠り賜え",
+					"永遠の悪夢から 解放されるように",
+					"ほら 底は泪の海 枯れることのない海",
+				],
+				alc:[
+					"Hellmeila Hellmeila",
+					"Iar imm Miis Mols",
+					"Finzo a Fiola end ol Melnaid",
+					"Veit Syarfi",
+					"Oul Solien",
+					"Vala ou Quondlea",
+					"Jiddle Ceeka",
+					"Meisem Clooshela",
+					"Klautie end ol Dizzle",
+
+					"Hellmeila Hellmeila Ah Salie Proula",
+					"Foul Xia o Siala end Dilem no Amie",
+					"a Siala Blem lar",
+					"o Shelista Plenptie",
+					"Cloud o Iequim Lef Mono",
+					"Porta end Flous imm Hellm",
+					"Olis Dooom Meele",
+					"ol Eem Ra Voi Kulu Awter Shellius imm Selaf",
+					"Gout Hellm o Ola Poul ail Ignai Canvie Imeila Prous Amblait",
+
+					"Yiep Wely il Kolto ou Tehomea",
+					"Qleel Mii Verse Lef Kulu Nai Harie Zel osa?",
+					"Yiep Wely Poetolt Heipe Sole ou Venesene",
+					"Qleel Mii Verse Iequim Lef Nai Aihel Folme Talis?",
+
+					"Mii Qleea Spai imm Meele ou Trane",
+					"o Xia Haol Cloud Telly il Mii Selaf Note?",
+					"Kulu Nai Ranya",
+					"end Kulu Nai Prifiel Zel Note",
+					"Hiele Shellius Yiep Leimy Bai",
+
+					"Yiela Prous il Kolto ou Tehomea",
+					"Lef Feikeed end Piikle Xaiti Herches",
+					"Yiela Sween Poetolt Heipe Sole ou Venesene",
+					"Lef Yien Leimy folme Vins Hellm imm Lootaria",
+					"Hiele Meele ou Trane Farla imm Kolto Via Ignai Dialoss",				
+				],
+			},
+			origin:{
+				eng:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.com/A%20Little%20Servant",
+				},
+				jpn:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.com/ASRB-Lyrics/A%20Little%20Servant",
+				},
+				alc:{
+					text:"Not Available",
+					url:"https://www.youtube.com/watch?v=1dNUWfqn6ok",
+				},
+			},
+		},{
+			name:"HOLIC",
+			lyric:{
+				eng:[
+					"Look at my brain, and I’m going to carve a formula by this knife",
+					"Don’t hide your eyes, Burn it into your eyes, more more!",
+					"There is the tombs of fallen angels",
+					"Ghosts staring at the fake",
+					"“Hug me”",
+					"Don’t walk around in my head, it seems like I am going to kill you",
+					"I think I understand",
+					"I can’t stop laughing, the interstellar ethers seemed iridescent",
+					"Even though the running blood is cold so much",
+					"Show me the phantom",
+					"Enough to waste, look look!",
+					"This is the tombs of fallen angels",
+					"Deads buried in fake",
+					"“Now, pray”",
+					"They don’t even notice that their hearts have been robbed",
+					"They think they’re alive",
+					"See, a rope pulled out of a drawer",
+					"A rope distorted by dragging a chair",
+					"A bright red rope of the end through which it passed",
+				],
+				jpn:[
+					"私の脳みそを見て このナイフで 数式を刻むから",
+					"目を伏せないで 目に焼き付けて もっと もっと",
+					"そこは 堕ちた天使たちの墓場",
+					"まやかしを見つめる 幽霊たち",
+					"”さぁ 抱きしめて”",
+					"頭の中をウロウロしないで 殺してしまいそう",
+					"わかってる つもりなんだよ",
+					"笑いが止まらない 星間エーテルが 虹色に光ってるように見えた",
+					"こんなに 流れる血は冷たいのに 幻を見せて",
+					"壊れるほど ねぇ ねぇ",
+					"ここは 堕ちた天使たちの墓場",
+					"まやかしに埋もれた 死者たち",
+					"”さぁ 礼拝して”",
+					"心まで かすめ取られたって まるで気づかない",
+					"生きている つもりなんだよ",
+					"ほら ドロワーから 引っ張り出した ロープ",
+					"椅子を引きずって 歪曲したロープ",
+					"通り抜けた先の 真っ赤なロープ",
+				],
+				alc:[
+				],
+			},
+			origin:{
+				eng:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.com/HOLIC",
+				},
+				jpn:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.com/ASRB-Lyrics/HOLIC",
+				},
+				alc:{
+					text:"Not Available",
+					url:"https://www.youtube.com/watch?v=-eCoVaVYx9Q",
+				},
+			},
+		},{
+			name:"Elysion's Old Mans",
+			lyric:{
+				eng:[
+					"Justice Justice Justice Valhalla",
+					"Border Border Border Following people",
+					"Dipping Dipping Dipping Waterdrops",
+					"“I’ m sorry!”",
+					"“I can’t hear anything”",
+					"Cough Cough Cough Don’t worry",
+					"Border Border Border Mourning people",
+					"Dripping Dripping Dripping I.V",
+					"“I’ m sorry!”",
+					"“I don’ t know anything”",
+
+					"Heartbeat and Holy Temple",
+					"Bouquet and Heart",
+					"Ancient Elevator, Forgotten Stuff",
+					"The cried number the disheartened number",
+					"- There are two types of justice in this paradise -",
+					"The justice that is held preciously and the justice that will be created from now",
+
+					"Justice Justice Justice Valhalla",
+					"Border Border Border Following people",
+					"Dipping Dipping Dipping Waterdrops",
+					"“I’ m sorry!”",
+					"“I can’t hear anything”",
+					"Cough Cough Cough Don’t worry",
+					"Border Border Border Mourning people",
+					"Dripping Dripping Dripping I.V",
+					"“I’ m sorry!”",
+					"“I don’ t know anything”",
+
+					"Diagonal Diagonal Diagonal, Who they’re glaring at each other",
+					"Twins Twins Twins, That might be the truth",
+					"Capital’s Capital’s Capital’s guardian, after they sleep",
+					"Exit Exit Exit, I’ ll bring you there",
+					"Age Age Age, it must repeat",
+					"Everyone Everyone Everyone know, right?",
+					"Capital’s Capital’s Capital’s guardian, after they sleep",
+					"Exit Exit Exit, I’ll bring you there",
+				],
+				jpn:[
+					"正義の 正義の 正義のヴァルハラ",
+					"国境 国境 国境 倣う人たち",
+					"滴る 滴る 滴る 水滴",
+					"“ごめんなさい！”",
+					"“何も聞こえません”",
+					"咳 咳 咳 気にしないで",
+					"国境 国境 国境 弔う人たち",
+					"滴る 滴る 滴る 点滴",
+					"“ごめんなさい！”",
+					"“何も聞こえません”",
+
+					"鼓動と神殿",
+					"花束と心臓",
+					"古代のエレベーター",
+					"泣いた数 挫けた数",
+					"- この楽園にある正義とは二種類 -",
+					"大事そうに抱えたその正義と これから創られる正義",
+
+					"正義の 正義の 正義のヴァルハラ",
+					"国境 国境 国境 倣う人たち",
+					"滴る 滴る 滴る 水滴",
+					"“ごめんなさい！”",
+					"“何も聞こえません”",
+					"咳 咳 咳 気にしないで",
+					"国境 国境 国境 弔う人たち",
+					"滴る 滴る 滴る 点滴",
+					"“ごめんなさい！”",
+					"“何も聞こえません”",
+
+					"対角線 対角線 対角線 睨み合っているのは",
+					"双生児 双生児 双生児 真実かもしれないね",
+					"帝都の 帝都の 帝都の 護り神が眠ったら",
+					"出口まで 出口まで 出口まで 送っていくよ",
+					"時代は 時代は 時代は 繰り返すって",
+					"みんな みんな みんな 本当は知ってるでしょ？",
+					"帝都の 帝都の 帝都の 護り神が眠ったら",
+					"出口まで 出口まで 出口まで 送っていくよ",
+				],
+				alc:[
+					"Grend Grend Walhalla ou Grend",
+					"Meeti Meeti Meeti Skyar Enes",
+					"Eala Eala Eala Aka Prii",
+					"Melart!",
+					"Nai Iar Zel Pray",
+					"Efok Efok Efok Poet nai Olte",
+					"Meeti Meeti Meeti Morhe Enes",
+					"Eala Eala Eala Heela Prii",
+					"Melart!",
+					"Mii Nai Guit Zel Note",
+
+					"Will a Shellarm",
+					"Fiolaza a Herches",
+					"Arupe Elled",
+					"Nols end ol Kllea end ol Sjlyupe",
+					"- Grend imm Bis Lanai o Di Toup -",
+					"imm Herz a Ajarla Yien Alista",
+
+					"Grend Grend Walhalla ou Grend",
+					"Meeti Meeti Meeti Skyar Enes",
+					"Eala Eala Eala Aka Prii",
+					"Melart!",
+					"Nai Iar Zel Pray",
+					"Efok Efok Efok Poet nai Olte",
+					"Meeti Meeti Meeti Morhe Enes",
+					"Eala Eala Eala Heela Prii",
+					"Melart!",
+					"Mii Nai Guit Zel Note",
+
+					"Kleet Kleet Kleet Og Perte",
+					"Diazz Diazz Diazz Voi o Selaf",
+					"Capite Capite Taz Capite Scteus",
+					"Sween, Lishe Senju Elie Finza",
+					"Efa Efa Efa Hierti",
+					"Oll Oll Oll Guit imm Selaf?",
+					"Capite Capite Taz Capite Scteus",
+					"Sween, Lishe Senju Elie Finza",
+				],
+			},
+			origin:{
+				eng:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.com/Elysions%20Old%20Mans",
+				},
+				jpn:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.com/ASRB-Lyrics/Elysions%20Old%20Mans",
+				},
+				alc:{
+					text:"訳者A様 ブログ",
+					url:"http://hon-yaku-a.jugem.jp/?eid=84",
+				},
+			},
+		},{
+			name:"Chocolate Missile",
+			lyric:{
+				eng:[
+					"Head and tail",
+					"Moon and Sun",
+					"A reason to exist, a mission, which will not be known forever",
+					"The downpour of missiles",
+					"I’m an umbrella, I will protect you from the calamity of this civilization",
+					"Upper and under the ground",
+					"storm and rainbow",
+					"Two people who will never intersect",
+					"are here now as a same girl",
+					"Friend?",
+					"don’t remember such a person",
+					"Oh, my head will split, might be broken",
+					"I’m very frustrating",
+					"La La La This morning is like a ptarmigan",
+					"Gaping hole in the dark",
+					"Ridiculing night reflects the freaky-deaky dwellers",
+					"It has been repeating almost 100years",
+					"why?",
+
+					"It is not an illusion!",
+					"Hey people in the thunder",
+					"help me",
+					"Please say there are nothing wrong, please",
+					"It is a lie!",
+					"Hey Orpheus in the thunder",
+					"please kill me",
+					"Let’s go to the Abyss soon",
+
+					"It is not an illusion!",
+					"Hey people in the thunder",
+					"help me",
+					"Please say there are nothing wrong, please",
+					"It is a lie!",
+					"Hey Orpheus in the thunder",
+					"please kill me",
+					"Let’s go to the Abyss soon",
+					"together",
+				],
+				jpn:[
+					"表と裏",
+					"月と太陽",
+					"永遠に知ることのない 存在する 所以 使命",
+					"降り注ぐミサイル",
+					"私は傘 此の文明の勿怪から あなたをお護りします",
+					"地上と地中",
+					"嵐と虹",
+					"永遠に交わることのない二人は",
+					"独りの少女として今此処にいる",
+					"友達？",
+					"覚えてないよ そんな人",
+					"あぁ 頭が割れる 壊れてしまいそうだ",
+					"とっても 悔しいの",
+					"La La La 雷鳥みたいな朝が来て",
+					"ぽっかりと闇に穴が空く",
+					"あざ笑う夜に映るのは 奇々怪々な住人たち",
+					"もう１００年 そんなことばかり",
+					"どうして",
+
+					"幻じゃない！",
+					"雷を往く世人よ",
+					"私を助けて",
+					"間違いなんて一つもなかったと 云ってよ お願い",
+					"嘘だよ！",
+					"雷を往くオルフェウスよ",
+					"さぁ 私を殺して",
+					"早くいきましょう 奈落の底まで",
+
+					"幻じゃない！",
+					"雷を往く世人よ",
+					"私を助けて",
+					"間違いなんて一つもなかったと 云ってよ お願い",
+					"嘘だよ！",
+					"雷を往くオルフェウスよ",
+					"さぁ 私を殺して",
+					"早くいきましょう 奈落の底まで",
+					"一緒に",
+				],
+				alc:[
+					"Meit a Solte",
+					"Minelia a Sail",
+					"Arsia ou Lazz a Pysietia end Vell Nai Guit",
+					"Missile end Cliid a Geeg",
+					"Vell Sctution Cloud ieq Falarle folme Erel ou Bis Ildrem",
+					"Eida a Edie",
+					"Brous a Ilis",
+					"Dex imm Bis Oli Aola ieq Drone",
+					"Iila Vell Nai Kreis imm Lootaria Zel",
+					"o Saray?",
+					"Mii Nai Dilem Graid ou Oltia Rak",
+					"Ah Epkejla Dizzle",
+					"Mii Qleea Razzle Eilent Olis",
+					"La La La Sai Lef Ziokla",
+					"Elay end Dora Dilem Roof Prolen",
+					"Imm Nouche Lef Skelat Retuel Katarles",
+					"Bai Hyune Tarn Oltia Note Mols",
+					"Wasiim?",
+
+					"Bis o Nai Hellm!",
+					"Hor Enes end Liz imm Ziok",
+					"Yiep Etuse Mii",
+					"Yiep Seek Ra Mizy ol Ignai, Phier",
+					"Bis o Emer!",
+					"Hor Orpheus end Liz imm Ziok",
+					"Yiep Torjest Mii",
+					"Lishe Luan Falke Elie Rowt",
+
+					"Bis o Nai Hellm!",
+					"Hor Enes end Liz imm Ziok",
+					"Yiep Etuse Mii",
+					"Yiep Seek Ra Mizy ol Ignai, Phier",
+					"Bis o Emer!",
+					"Hor Orpheus end Liz imm Ziok",
+					"Yiep Torjest Mii",
+					"Lishe Luan Falke Elie Rowt",
+					"Saryarte",
+				],
+			},
+			origin:{
+				eng:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.com/Chocolate%20Missile",
+				},
+				jpn:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.com/ASRB-Lyrics/Chocolate%20Missile",
+				},
+				alc:{
+					text:"訳者A様 ブログ",
+					url:"http://hon-yaku-a.jugem.jp/?eid=85",
+				},
+			},
+		},{
+			name:"Zukan",
+			lyric:{
+				eng:[
+					"A row of specimens in a white room",
+					"We sleep",
+					"A end of edification",
+					"and a dead end",
+					"Slowly reduced to ashes",
+
+					"Expressionless, Sterile room",
+					"We sleep",
+					"Time, After leaving the shell",
+					"Let’s bid farewell",
+					"Infinite journey",
+					"Floating feathers",
+					"Feeling of being unwound",
+					"To be spellbound in the name of a soul",
+					"Then human is blessed with eternity",
+					"An organized pictorial books",
+					"Someday It may forgive me to think of something",
+					"Someday Someday Someday…",
+				],
+				jpn:[
+					"白い部屋に 並んだ標本",
+					"私たちは 眠る",
+					"教化の果てと",
+					"行き止まり",
+					"ゆっくりと灰になる",
+
+					"無表情 無菌室",
+					"私たちは 眠る",
+					"時間 抜け殻を置いたら",
+					"お別れをしましょう",
+					"無窮の旅",
+					"たゆたう翅",
+					"ほどけたままの感覚",
+					"魂の名のもとに 魔法にかかる",
+					"そうして 人は 永遠を授かる",
+					"整理された図鑑",
+					"何かを想う事を いつか 赦してくれるのかもしれない",
+					"いつか いつか いつか…",
+				],
+				alc:[
+					"Speixam end Gleetz imm Arla Pazz",
+					"Mill Sween",
+					"Ween ou Okititil",
+					"a Oli end Ley Nai",
+					"idem Arsa Yulleia",
+
+					"Noa Fimeles Noa Melineto Pazz",
+					"Mill Sween",
+					"Zeit Poetolt Peil imiylt Swinia",
+					"Lishe Poet Rook",
+					"Via ou Loast",
+					"Elza end Apeilf Yullk",
+					"Aisia Mia Koll Solfe Ley",
+					"Mill Yien Laidiik Mage imm ixche ou Sole",
+					"Endjulf Ene Woli Lootaria",
+					"Yien Tieiket Nielateleq",
+					"Voi Yien Holo Mane Ra Mill Harmey osa Zel Note",
+					"Mane...",
+				],
+			},
+			origin:{
+				eng:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.com/Zukan",
+				},
+				jpn:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.com/ASRB-Lyrics/Zukan",
+				},
+				alc:{
+					text:"Mono.T様 Twitter",
+					url:"https://twitter.com/Somnio10nox/status/1271830716481822721",
+				},
+			},
+		},{
+			name:"Flyburg and Endroll",
+			lyric:{
+				eng:[
+					"He got stars in his eyes and sang",
+					"“I will be the sun and protect you”",
+					"But East wind drowned his words",
+					"Children born at the break of day",
+					"The town touched on magical square hatches in the course of time and carries them two",
+
+					"“Come with me”",
+					"I leave you a big treasure box, completely white terra, and never-ending freedom",
+					"Touched hands become wing",
+						"Dry words become light",
+						"Travel until the sea route goes to the end and they meet again",
+						"Breath become birds",
+					"Airborne droplets celebrate",
+					"Each time beat their wings during ending celebration",
+						"the sun rise and remember",
+
+					"“Come with me”",
+					"I leave you a big treasure box, completely white terra, and never-ending freedom",
+					"Touched hands become wing",
+						"Dry words become light",
+						"Travel until the sea route goes to the end and they meet again",
+						"Breath become birds",
+					"Airborne droplets celebrate",
+					"Each time beat their wings during ending celebration",
+						"the sun rise and remember",
+				],
+				jpn:[
+					"少年は目を輝かせて唄った",
+					"“ぼくは太陽になって、君を守るんだ”と",
+					"東の風は 言葉の続きをかき消した",
+					"暁の元に生まれた子ども",
+					"やがて魔方陣に触れた街は孵化をして 二人を運ぶ",
+
+					"“一緒においで”",
+					"大きな宝箱を 真っ白なterra を そして終りのない自由を君に預けよう",
+					"触れた手は 羽になって",
+					"渇いた言葉は 光になる",
+					"航路がエンドロウルを描いて また会える日まで旅をする",
+					"咲いた息吹は 鳥になって",
+					"放った飛沫が 祝福をする",
+					"羽音がエンドロウルに響く度",
+					"陽は昇って想いを馳せる",
+
+					"“一緒においで”",
+					"大きな宝箱を 真っ白なterra を そして終りのない自由を君に預けよう",
+					"触れた手は 羽になって",
+					"渇いた言葉は 光になる",
+					"航路がエンドロウルを描いて また会える日まで旅をする",
+					"咲いた息吹は 鳥になって",
+					"放った飛沫が 祝福をする",
+					"羽音がエンドロウルに響く度",
+					"陽は昇って想いを馳せる",
+				],
+				alc:[
+					"a ran eclat iis Seiren",
+					'"Sail ou Mii end Crai Sctution"',
+					"Esto Hyuz Seiren",
+					"a Ame ou Bis Sartain",
+					"rie end Fel Swiina Fel ou Mage a Rinasia end Stea Dis",
+
+					'"Elay Sar"',
+					"Telly Brai Oul Laqq end Tella ou Arla end Mii Telly Crai Nai ou Finz Hait end Finz Hait",
+					"Haol Sanz Miz Elza",
+						"end Jac Verry Miz Lusia",
+						"a Stea Endroll ou Laiziin Karna Awter Crai",
+						"a Brait Ani Miz Laila",
+					"Ritto Aka Goss",
+					"Pray ou Elza Challern Endroll",
+						"end Sartain Harmiy Lar Crai Lar",
+
+					'"Elay Sar"',
+					"Telly Brai Oul Laqq end Tella ou Arla end Mii Telly Crai Nai ou Finz Hait end Finz Hait",
+					"Haol Sanz Miz Elza",
+						"end Jac Verry Miz Lusia",
+						"a Stea Endroll ou Laiziin Karna Awter Crai",
+						"a Brait Ani Miz Laila",
+					"Ritto Aka Goss",
+					"Pray ou Elza Challern Endroll",
+						"end Sartain Harmiy Lar Crai Lar",
+				],
+			},
+			origin:{
+				eng:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.com/Flyburg-and-Endroll",
+				},
+				jpn:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.com/ASRB-Lyrics/Flyburg-and-Endroll",
+				},
+				alc:{
+					text:"Mono.T様 Twitter",
+					url:"https://twitter.com/Somnio10nox/status/1267854467094831105",
+				},
+			},
+		},{
+			name:"End of Mythology",
+			lyric:{
+				eng:[
+					"He was waiting alone at the end of a story",
+					"It is sad",
+					"In the end, we never got to see the rest of the story",
+					"Quill pen fell from the hands, dropped on top of a full moon",
+					"Then you said, filled with sadness, I still remember your words",
+					"“It’s okay, don’t worry. New day will come”",
+					"We are unfortunate, that’s why we are rewriting the story, with this hands, with that hands",
+					"I plunged into the night sky with all my might",
+					"It’s alright even if you can’t come back, leave behind what you don’t need",
+					"Let’s start from here",
+					"The mythology that’s been abandoned and neglected",
+				],
+				jpn:[
+					"或る物語の終わりで 彼はひとり待っていた",
+					"切ないね 結局 その話の続きは見られなかった",
+					"羽根ペンが 手から満月の上へ落ちた",
+					"その時 君が寂しそうに云った言葉を 今でも覚えているよ",
+					"“大丈夫 心配しないで 新しい朝は 必ず訪れるよ”",
+					"私たちは不幸だ だから物語を書き換えるんだ この手で その手で",
+					"無我夢中で 夜空に飛び込んだ",
+					"帰れなくたって良い 必要のないモノは捨てていけ",
+					"さぁここから始めよう 途切れたままの神話を",
+				],
+				alc:[
+				],
+			},
+			origin:{
+				eng:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.com/End-of-Mythology",
+				},
+				jpn:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.com/ASRB-Lyrics/End-of-Mythology",
+				},
+				alc:{
+					text:"Not Available",
+					url:"https://www.youtube.com/watch?v=uO3X8z4zSYQ",
+				},
+			},
+		},{
+			name:"Toys",
+			lyric:{
+				eng:[
+					"A small door behind the eyelids, the night with memories comes to me",
+					"Childhood, cold wind, color of snow, broken toys",
+					"Scars and scratches, time passed",
+					"Words that could not be conveyed",
+					"The person that I cannot see again",
+					"Oh, this is an illusion",
+					"Empty intersection, traffic lights that remain the same, deja vu that has piled up",
+					"I am here alone and you are there alone",
+					"In the middle of this long road, I must have forgotten a lot of things",
+					"Even nights with frustration, ordinary dawn, fragment of heartbeats, and even some memories",
+					"You see, a deep breath that’s is a sign of departure, slips through the space between the stars",
+					"Just like that, I go through many nights again",
+				],
+				jpn:[
+					"瞼の裏の小さな扉 記憶の夜が訪れる",
+					"子供の頃 冷たい風 雪の色 壊れたおもちゃ",
+					"すりむいた傷 通り過ぎた時間",
+					"伝えられなかった言葉",
+					"もう会えない人",
+					"ああ ここは幻",
+					"空虚の交差点 止まったままの信号機 積み上げたデジャヴ",
+					"私だけがここにいて そしてあなただけがそこにいる",
+					"長い道の途中 きっと 色んな事を忘れてしまったんだ",
+					"失意の夜も ささやかな夜明けも 鼓動の欠片も 思い出も",
+					"ほら 旅立ちを告げる深呼吸が 星の透き間をすり抜ける",
+					"そんな風にまた 幾つもの夜を越えてゆく",
+				],
+				alc:[
+				],
+			},
+			origin:{
+				eng:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.com/Toys",
+				},
+				jpn:{
+					text:"公式サイト",
+					url:"https://alice-orchestra.com/ASRB-Lyrics/Toys",
+				},
+				alc:{
+					text:"Not Available",
+					url:"https://www.youtube.com/watch?v=2goBqyBGGmM",
+				},
+			},
+		},{
+			name:"Teardrop del Rey",
+			lyric:{
+				eng:[
+					"This is a story of the kingdom drowned under the golden desert.",
+					"The king looked up at the sky without rain, and deplored deeply.",
+					"Many many years",
+						"the town will be covered by golden wind",
+						"and lost in white night.",
+					"In this endless season",
+						"everyone also deplored.",
+					"Eventually a child draw paints a cloud route on a canvas.",
+
+					"A town wrapped in a dense fog.",
+						"Then a new day will just come.",
+					"Bounce the reminiscence with those hands",
+						"You'll have a heavy rain.",
+						"The accumulated sigh will flow",
+						"and the sun will rise again.",
+					"Get your hands up to the sky.",
+						"You'll have a heavy rain.",
+					"The golden wall stood up against will collapse",
+						"and the sun will rise again.",
+
+					"Earth, Wind, Fire, Water, Magical words",
+					"Earth, Wind, Fire, Water, Summon of sanctuary",
+
+					"Now here is the throne of history.",
+					"Esperance on the right hand",
+						"future on the left hand,",
+						"and the new age will open in the morning.",
+					"Bounce the reminiscence with those hands.",
+						"You'll have a heavy rain.",
+						"The accumulated sigh will be flushed",
+						"and the sun will rise again.",
+					"Get your hands up to the sky.",
+						"You'll have a heavy rain.",
+					"The golden wall stood up against will collapse",
+						"and the sun will rise again.",
+				],
+				jpn:[
+					"金色の砂漠に溺れた 或る王国の物語",
+					"雨の降らない空を眺める王様は とても嘆き悲しんだ",
+					"幾年も幾年も",
+						"街は金色の風に包まれたまま",
+						"白夜の中をさ迷うのだ",
+					"終わることのない季節の中",
+						"みんなも嘆き悲しんだ",
+					"やがて或るひとりの子供が キャンバスに雲の航路を描く",
+					
+					"深い霧に包まれた街",
+						"そして 新たな朝がやってくる",
+					"追憶をその手で弾け",
+						"大きな雨が降るだろう",
+						"積もった溜め息は流されて",
+						"また太陽が昇るだろう",
+					"大空へその手を仰げ",
+						"大きな雨が降るだろう",
+						"立ちふさがった金色の壁は崩れ落ちて",
+						"また太陽が昇るだろう",
+
+					"土・風・炎・水 魔法の言葉",
+					"土・風・炎・水 聖域の召還",
+
+					"今 ここは歴史の玉座",
+					"希望を右手に",
+					"未来を左手に",
+						"そして新たな朝がやってくる",
+					"追憶をその手で弾け",
+						"大きな雨が降るだろう",
+						"積もった溜め息は流されて",
+						"また太陽が昇るだろう",
+					"大空へその手を仰げ",
+						"大きな雨が降るだろう",
+						"立ちふさがった金色の壁は崩れ落ちて",
+						"また太陽が昇るだろう",
+				],
+				alc:[
+					"Giinia Ostel Spai Ani Lyckto ou Story",
+					"Liin Cliid Nai Lyck Skaid Olis Jay",
+					"Hai Tarn a Tarn Fel",
+						"Swiina Giinia Hyuz",
+						"Whiil Nouche a Luan",
+					"tie Finz Nai Zote en",
+						"a Brai Noll Olis Jay",
+					"Drone rie a iila Brou ah Laiziin ou Stea",
+
+					"Fel Swiina end Dooom Nilai",
+						"en a Gate Sai Elay end a Sai end Elay",
+					"Ritto a Graid Haol Xia",
+						"end Oulayz Liin Cliid a Laiz",
+						"end Ail Olca Zenoth Tella",
+						"end Sail Aasye Karna La La Laiz",
+					"Hyula Sarga Haol Xia",
+						"end Oulayz Liin Cliid a Laiz",
+						"Razzle a Gent Vala",
+						"end Sail Aasye Karna La La La Laiz",
+
+					'"Era" "Hyuz" "Aka" "Shay" en Disverry',
+					'"Era" "Hyuz" "Aka" "Shay" en invalda',
+
+					"Aola Mii end Bis Graid a Lytori",
+					"Dex Harla",
+						"end Sinis Laiz",
+						"end Gete Sai Elay Lar Laiz",
+					"Ritto a Graid Haol Xia",
+						"end Oulayz Liin Cliid a Laiz",
+						"end Ail Olca Zenoth Tella",
+						"end Sail Aasye Karna Laiz",
+					"Hyula Sarga Haol Xia",
+						"end Oulayz Liin Cliid a Laiz",
+						"Razzle a Gent Vala",
+						"end Sail Aasye Karna Laiz",
+				],
+			},
+			origin:{
+				eng:{
+					text:"公式Youtube",
+					url:"https://www.youtube.com/watch?v=-wtutsbzPFM",
+				},
+				jpn:{
+					text:"Mono.T様 Twitter",
+					url:"https://twitter.com/Somnio10nox/status/1271833040428269568",
+				},
+				alc:{
+					text:"Mono.T様 Twitter",
+					url:"https://twitter.com/Somnio10nox/status/1271833040428269568",
+				},
+			},
+		},{
+			name:"FEHLT",
+			lyric:{
+				eng:[
+					"Someday, if this gray dream melt,",
+					"and we can return to that paradise.",
+					"The door to return has been closed.",
+					"We are trapped in golden cages, the human subjects.",
+
+					"The floating corridor is ruined.",
+					"The sight of you disappearing.",
+					"It's been shown in my head many times like a projector.",
+					"And, in an unwakeable dream, I'm just wandering like a puppet.",
+					"Dive into a test tube",
+					"Sink deeply and deeply",
+					"So that no one can find me",
+
+					"Just repeated to live",
+					"No matter how many times I end it",
+					"There are always only rusty desires in the end.",
+					"Under the name of prayer and pride, life goes around in an inorganic way.",
+					"Faint moonlight",
+					"Cracked preparation",
+					"I'm waiting for the true end.",
+					'"Now, swallow"',
+					'"another gray dream."',
+
+					"Just repeated to live",
+					"No matter how many times I end it",
+					"There are always only rusty desires in the end.",
+					"Under the name of prayer and pride, life goes around in an inorganic way.",
+					"Faint moonlight",
+					"Cracked preparation",
+					"I'm waiting for the true end.",
+					'"Now, swallow"',
+					'"another gray dream."',
+				],
+				jpn:[
+					"いつかこの灰色の夢が溶けて",
+					"あの楽園に帰ることができるなら",
+					"帰路への道は閉ざされた",
+					"僕たちは金色の檻に閉じ込められた被験者たち",
+
+					"浮かぶ回廊は廃墟",
+					"君が消えていく姿は",
+					"映写機のように 何度も頭の中で流れるんだよ",
+					"そして 今もずっと覚めない夢を",
+					"ただ 傀儡のように 彷徨っているんだ",
+					"試験管に潜って 深く沈む",
+					"誰にも見つからないように",
+
+					"生きることをただ繰り返して",
+					"何度終わらせたところで",
+					"いつだって最期にあるのは 錆びついた願望だけ",
+					"祈りと誇りの名の下に ただ無機質に命は巡る",
+					"仄かな月明かり",
+					"ひび割れたプレパラート",
+					"僕は本当の終わりを待っている",
+					"「さぁ 飲み込みなさい」",
+					"「もう一粒 灰色の夢を」",
+
+					"生きることをただ繰り返して",
+					"何度終わらせたところで",
+					"いつだって最期にあるのは 錆びついた願望だけ",
+					"祈りと誇りの名の下に ただ無機質に命は巡る",
+					"仄かな月明かり",
+					"ひび割れたプレパラート",
+					"僕は本当の終わりを待っている",
+					"「さぁ 飲み込みなさい」",
+					"「もう一粒 灰色の夢を」",
+				],
+				alc:[
+					"Elaisic Mii Hols Karna Ra Mane Bis Ewol Hellm",
+					"Qleea Weliim en Mii Kulu Fal il Twiik Lanai",
+					"Eist il Slay lar Falt Yiend Clooshe Mii Yiend Teejt",
+					"imm Brai ou Giinia Velidi Mill iy Pliphalaineqls",
+
+					"Sleetia end Flous iy Kopiitoli",
+					"Crait Sadiet Tvulei Yien Seeka",
+					"imm Brai ou Epekejla Myahalke Lef Plenptie",
+					"En Mii Likti Selanya a Geeg imm Hellm end Nai Dilem Siita imm Lootaria Lef Mariotoriet",
+					"Antakt il Pliphasoil",
+					"en Wely Doomlait",
+					"Mii Hols Olizes ignai Rait Mii",
+
+					"imeila Likti Hierti Ellift",
+					"en Finzie Myahalke",
+					"Baly Harla end Sjeid Mols Rance imm Finz Ween",
+					"Lazz Floul Ebilinijeslait Lim ixche ou Prousia a Olseiph",
+					"Seekle Minelia Lusia",
+					"Qlittit Preparat",
+					"Mii inay Sel Finz",
+					'"Leste Phier Womphil"',
+					'"Mier Ani Emsa Ewol Hellm"',
+
+					"imeila Likti Hierti Ellift",
+					"en Finzie Myahalke",
+					"Baly Harla end Sjeid Mols Rance imm Finz Ween",
+					"Lazz Floul Ebilinijeslait Lim ixche ou Prousia a Olseiph",
+					"Seekle Minelia Lusia",
+					"Qlittit Preparat",
+					"Mii inay Sel Finz",
+					'"Leste Phier Womphil"',
+					'"Mier Ani Emsa Ewol Hellm"',
+				],
+			},
+			origin:{
+				eng:{
+					text:"公式Youtube",
+					url:"https://www.youtube.com/watch?v=-XU5N0aIAG4",
+				},
+				jpn:{
+					text:"Mono.T様 Twitter",
+					url:"https://twitter.com/Somnio10nox/status/1271791018673750016",
+				},
+				alc:{
+					text:"Mono.T様 Twitter",
+					url:"https://twitter.com/Somnio10nox/status/1271791018673750016",
+				},
+			},
+		},{
+			name:"Give Me a Nightmare",
+			lyric:{
+				eng:[
+					"New day is just opening!",
+					"because it looked really hopeless.",
+					"While I took root in disorderly memory reflecting on the water in the morning.",
+					"I hoped to escape from these boring days somehow",
+
+					"When I closed the door roundly,",
+					"a comet fell",
+					"I just walked on the corridor, as if I was pulled by the full moon's attraction,",
+					"but finally found that it was endless.",
+					"Utopia is only in the heart.",
+					"True things can only be understood by oneself.",
+					"So go forward alone from here.",
+					"“Happiness” doesn't talk to humans",
+
+					"Now, it's time to release!",
+					"Don't forget the wish that you couldn't fulfill back then.",
+					"As more tears run down your face,",
+					"the stronger you will be",
+
+					"Now, it's time to release!",
+					"Don't forget the rage that you couldn't pay off back then.",
+					"Keep that mortification in your bag,",
+					"and foot it together on the long journey.",
+
+					"Morning comes only for those who have gone beyond the night.",
+					"Great nightmares!",
+					"Let's hide our agony together, and speak until you feel well",
+					"Sleeping comet",
+					"opening door.",
+					"Your new day is just here",
+				],
+				jpn:[
+					"新しい一日が始まる！",
+					"それは とても絶望的に見えたから",
+					"朝影に映る 散らかった記憶に根を張ったまま",
+					"どうにかして 日常から逃げ出したくなったんだ",
+
+					"扉を思い切り閉めると",
+					"彗星が降り注いだ",
+					"満月の引力に引っ張られるように 回廊の上をひたすら歩いたけれど",
+					"結局 ここに終わりはないと知った",
+					"ユートピアは 心の中にしかない",
+					"本当のことは みんな自分にしかわからない",
+					"だから ここから先は ひとりで行ったほうがいいの",
+					"「幸福」は人間とは話してくれない",
+
+					"さぁ、解放の時間だ",
+					"あの時 叶わなかった 望みを忘れるな",
+					"涙がひと粒 頬を伝えば",
+					"またひとつ強くなれる",
+
+					"さぁ、解放の時間だ",
+					"あの時 果たせなかった 怒りを忘れるな",
+					"その悔しさを カバンに詰め込んで",
+					"長い道を 一緒に歩いていけばいいんだ",
+
+					"夜を越えた者だけに 朝はやってくる",
+					"素晴らしい悪夢たちよ",
+					"一緒に苦しみを纏って 気が済むまで話そう",
+					"眠る彗星",
+					"開いた扉",
+					"君の新しい一日は ここだよ",
+				],
+				alc:[
+					"Gete Ani Yutul Frait!",
+					"Elize Xia ol Tiisa Lef Harlanoa Olistea",
+					"Meisem Graid end Yien Rustie il Salah ou Sai",
+					"Koll Olfeis Noll imm Xia, ilek ol Hols tou Kerla folme Ailent",
+
+					"Poutie Mii Clooshe Eist Ord Ail Entic",
+					"Kiila ol Prai a Cliid",
+					"Lef Yien Plarli Ord Elquom ou Ail Minelia Gout ol Cate imm Lootaria Arch Sleetia",
+					"Poul ail ol Guit Ra Bis Dilem Nai Shiita",
+					"Yuwlpie Aihel Mols imm Brai ou Millte Herz",
+					"Ollenes Guit Selaf Note Mols Ord Miis",
+					"Elize Crai Epie Luan Ord Drone il Naits folme Bis",
+					'"Frey" Lishe Nai Hal il Enes',
+
+					"Leste, Dou Zeit ou Leimyt",
+					"Poet Nai Dist Harla Crai ol Kulu Nai Ekphie imm Twiik Taz",
+					"Poutie Ani Emsa Trane Eala a Tollm Arch Fenklu",
+					"Vell Idem Entilk Ani Karna",
+
+					"Leste, Dou Zeit ou Leimyt",
+					"Poet Nai Dist Theegie Crai ol Kulu Nai impihs imm Twiik Taz",
+					"ied Peitim Xia Eilent il Brai ou Droq",
+					"en ied Geeg a Cate ifa Xia imm Loog Slay",
+
+					"il Mols Ene end ol Skie Nouche, Sai Vell Elay",
+					"Hor Pllardki Vinshellms",
+					"Lishe Hal Elie Mill idem Samb, Poetolt Swiina Dim Saryarte",
+					"Kiila end Sween",
+					"Eist end Brait",
+					"Crait Gete Ani Yutul o Bis"
+				],
+			},
+			origin:{
+				eng:{
+					text:"公式Youtube",
+					url:"https://www.youtube.com/watch?v=6Fa1I1zqK-g",
+				},
+				jpn:{
+					text:"Mono.T様 Twitter",
+					url:"https://twitter.com/Somnio10nox/status/1270385399056068609",
+				},
+				alc:{
+					text:"Mono.T様 Twitter",
+					url:"https://twitter.com/Somnio10nox/status/1270385399056068609",
+				},
+			},
+		},{
+			name:"",
+			lyric:{
+				eng:[
+				],
+				jpn:[
+				],
+				alc:[
+				],
+			},
+			origin:{
+				eng:{
+					text:"",
+					url:"",
+				},
+				jpn:{
+					text:"",
+					url:"",
+				},
+				alc:{
+					text:"",
+					url:"",
+				},
 			},
 		}];
 		const lyrics=raw.map(val=>val.lyric.eng.map((v,i)=>{
