@@ -14,10 +14,8 @@
 				margin:10px;
 				padding:0;
 			}
-			input[type=checkbox]{
+			#search input[type=checkbox]{
 				display:none;
-				height:20px;
-				width: 20px;
 			}
 			em{
 				display:inline-block;
@@ -40,15 +38,29 @@
 				font-style: italic;
 			}
 			table{
-				table-layout:fixed;
 				display:inline-block;
-				font-weight:normal;
 				margin-left:auto;
 				margin-right:auto;
+				text-align: center;
+			}
+			#narrow{
+				width:90%;
+				margin: 0 auto;
+				text-align: left;
+			}
+			#narrow p,table,div{
+				padding-left: 2em;
+			}
+			#narrow td{
+				padding-right:10px;
+			}
+			table.fixed td{
+				width:80px;
 			}
 		</style>
 	</head>
 	<body onload="start();">
+		<h2>単語・例文辞書</h2>
 		<p id=search>
 			<input list=name_l placeholder=Name type=search id=name onChange="search(this);">
 			<input list=alc_l placeholder=ALC type=search id=alc onChange="search(this);">
@@ -58,11 +70,322 @@
 			<datalist id=name_l></datalist>
 			<datalist id=alc_l></datalist>
 			<datalist id=eng_l></datalist>
-		</div>
+		</p>
 		<table id=sentence></table>
-		<p>Lyrics are cited from...</p>
-		<table id=credit></table>
+		<h2>歌詞出典</h2>
+		<table id=origin></table>
 		<a id=download></a>
+		<div id=narrow>
+			<h2>文字について</h2>
+			<p>
+				Alician文字の対応表は<a target="_blank" href="http://hon-yaku-a.jugem.jp/?eid=86">こちら(http://hon-yaku-a.jugem.jp/?eid=86)</a>を使用しています。
+				文字数が少ないためか、タイ文字やハングルよりも簡単に読めるようになるのではないかと感じます。<br>
+				ほとんどの動画や別の媒体で同じ字体が用いられていますが、<a target="_blank" href="https://www.youtube.com/watch?v=kfbj-2SHuDM">Fushigi ChanのMV</a>では少し変わった字体となっています。
+				また本動画では小文字のnとeが逆に用いられているようですが、その理由は不明です。<br>
+				大文字の使用は文頭だけでなく、名詞、形容詞、副詞、接続詞などほとんどの単語の語頭が大文字表記になるようです。
+				一方で一部の短い前置詞、動詞、助動詞、関係詞は小文字表記となります。
+				それらが文頭に出た際に大文字になるかどうかはやや揺れがあるようです。<br>
+				単語は概ねスペースを用いて分かち書きされますが、-laitや-qlsなどの接尾辞では分かち書きされる場合とされない場合があります。
+				また、,（カンマ）や.（ピリオド）も決まった打ち方はないようです。改行を文の単位とする可能性はありそうですが、
+				MV中では必ずしも文の塊とは一致していません。
+				表記は概ね発音と一致しているようですが、聞き取りやすいということはありません。
+			</p>
+			<h2>文</h2>
+			<p>
+				Alicianは複雑な活用もなければ、付属語もありません。
+				かなり英語を下敷きにしていると考えられますが、時制や受動態も基本的に助動詞で表現し、
+				冠詞などもないので、文法は英語よりもずっと簡単です。
+			</p>
+			<div>
+				<h3>否定文</h3>
+				<div>
+					<h4>Nai</h4>
+					<p>単純な否定副詞Notを表し、助動詞の後、本動詞の前に置かれます。命令文ではPoet Nai Vとなります。</p>
+					<div>
+						<table>
+							<tr><td>Bis</td><td>o</td><th>Nai</th><td>Hellm!</td><td><i>-Chocolate Missile</i></td></tr>
+							<tr><td>This</td><td>is</td><th>not</th><td>illusion!</td><td>幻じゃない！</td></tr>
+						</table>
+						<table>
+							<tr><td>Cloud</td><td>Kulu</td><th>Nai</th><td>Imiyl</td><td>Bis.</td><td><i>-Kill My Fortune</i></td></tr>
+							<tr><td>You</td><td>can</td><th>not</th><td>pass</td><td>this.</td><td>ここを通ることは出来ません</td></tr>
+						</table>
+						<table>
+							<tr><th>Poet</th><th>Nai</th><td>Kllea</td><td><i>-Children in the Ashes</i></td></tr>
+							<tr><th>Do</th><th>not</th><td>cry.</td><td>泣かないで</td></tr>
+						</table>
+					</div>
+					<h4>Ignai</h4>
+					<p>強い否定副詞Neverを表します。</p>
+					<div>
+						<table>
+							<tr><td>Bis</td><td>iy</td><th>Ignai</th><td>Lanai</td><td><i>-▷NEW GAME</i></td></tr>
+							<tr><td>This</td><td>is</td><th>never</th><td>paradise</td><td>ここは楽園などではない</td></tr>
+						</table>
+						<table>
+							<tr><td>Bis</td><td>Krey</td><td>Paphileeta</td><td>Vell</td><th>Ignai</th><td>verse.</td><td><i>-Psukhe</i></td></tr>
+							<tr><td>This</td><td>tiny</td><td>universe</td><td>will</td><th>never</th><td>disappear.</td><td>この小さな宇宙は消えることはない</td></tr>
+						</table>
+					</div>
+					<h4>no</h4>
+					<p>英語のnoと同じく否定形容詞です。</p>
+					<div>
+						<table>
+							<tr><td>Xia</td><td>o</td><td>Siala</td><td>end</td><td>Dilem</td><th>no</th><td>Amie</td><td><i>-A Little Servant</i></td></tr>
+							<tr><td>That</td><td>is</td><td>song</td><td>which</td><td>have</td><th>no</th><td>love</td><td>*それは愛のない唄</td></tr>
+						</table>
+					</div>
+					<h4>Nai ~ Amblu</h4>
+					<p>Ambluはanywhereと似た意味を持っているので、合わせてnowhere、「どこにもない」となります。</p>
+					<div>
+						<table>
+							<tr><td>Xia</td><th>Nai</th><td>Arth</td><th>Amblu.</th><td><i>-Children in the Ashes</i></td></tr>
+							<tr><td>That</td><th>(does) not</th><td>exist</td><th>anywhere.</th><td>どこにもいない</td></tr>
+						</table>
+						<table>
+							<tr><td>Slay</td><td>lar</td><td>Kerlat</td><td>iy</td><th>Ignai Amblu.</th><td><i>-Hypnotyzed</i></td></tr>
+							<tr><td>Way</td><td>for</td><td>running away</td><td>is</td><th>nowhere.</th><td>退路など何処にもない</td></tr>
+						</table>
+					</div>
+					<h4>Nai ~ Zel ~</h4>
+					<p>Zelはanyと対応し、Zel Note=anything, Zel Pray=any soundとして用い、Naiと結びついて何も～しないとなります。</p>
+					<div>
+						<table>
+							<tr><td>Mii</td><th>Nai</th><td>Guit</td><th>Zel</th><td>Note.</td><td><i>-Elysion's Old Mans</i></td></tr>
+							<tr><td>I</td><th>(do) not</th><td>know</td><th>any</th><td>thing.</td><td>*何も知りません</td></tr>
+						</table>
+						<table>
+							<tr><td>Vell</td><th>Nai</th><td>Dilem</td><th>Zel</th><td>Graid.</td><td><i>-▷NEW GAME</i></td></tr>
+							<tr><td>(I) Will</td><th>not</th><td>have</td><th>any</th><td>memory.</td><td>何もおぼえていない</td></tr>
+						</table>
+					</div>
+					<h4>Nai ~ Bai</h4>
+					<p>Baiはanymoreと同じ意味です。</p>
+					<div>
+						<table>
+							<tr><td>Mii</td><th>Nai</th><td>Dilem</td><td>Harla</td><th>Bai</th><td><i>-Children in the Ashes</i></td></tr>
+							<tr><td>I</td><th>(do) not</th><td>have</td><td>desire</td><th>anymore</th><td>*もうなんの希望もない</td></tr>
+						</table>
+						<table>
+							<tr><td>Kulu</td><th>Nai</th><td>Felia</td><th>Bai!</th><td><i>-▷NEW GAME</i></td></tr>
+							<tr><td>(I) Can</td><th>not</th><td>bear</td><th>anymore!</th><td>もう耐えられない！</td></tr>
+						</table>
+					</div>
+				</div>
+				<h3>疑問文</h3>
+				<div>
+					<h4>倒置</h4>
+					<p>iyやoなどのcopulaでは倒置で疑問文を作ることが出来ます。</p>
+					<div>
+						<table>
+							<tr><th>iy</th><th>Crai</th><td>ou</td><td>Volp qls...?</td><td><i>-Kill My Fortune</i></td></tr>
+							<tr><th>Are</th><th>you</th><td>of</td><td>ghosts...?</td><td>君はお化けたちの...？</td></tr>
+						</table>
+						<table>
+							<tr><th>o</th><td>Saray?</td><td><i>-Chocolate Missile</i></td></tr>
+							<tr><th>Is</th><td>friend?</td><td>友達？</td></tr>
+						</table>
+					</div>
+					<h4>Lend</h4>
+					<p>語頭にLendを置くことで倒置せずに疑問文になります。</p>
+					<div>
+						<table>
+							<tr><th>Lend</th><td>Cloud</td><td>Skeem</td><td>Gete</td><td>Liumd?</td><td><i>-▷NEW GAME</i></td></tr>
+							<tr><th>Would</th><td>you</td><td>start</td><td>new</td><td>game?</td><td>NEW GAMEをはじめますか？</td></tr>
+						</table>
+						<table>
+							<tr><th>Lend</th><td>Flea</td><td>end</td><td>ol</td><td>Yien</td><td>Vakka</td><td>Ord</td><td>Sarah</td><th>iy?</th><td><i>-Popcorns Falling from Heaven</i></td></tr>
+							<tr><th>Would</th><td>those</td><td>who</td><td>have</td><td>been</td><td>possessed</td><td>by</td><td>shadow</td><th>be?</th><td>影に取り憑かれたものは?</td></tr>
+						</table>
+					</div>
+					<h4>疑問詞</h4>
+					<p>疑問詞が語頭に出て、copulaの場合には倒置もします。</p>
+					<div>
+						<table>
+							<tr><th>Blemyte</th><td>Holtica</td><td>iy</td><td>Xia</td><td><i>-Urxbxrxs</i></td></tr>
+							<tr><th>Whose</th><td>sin</td><td>is</td><td>it?</td><td>その罪は誰のもの</td></tr>
+						</table>
+						<table>
+							<tr><th>Wasiim</th><td>Crai</td><td>Poet?</td><td><i>-Children in the Ashes</i></td></tr>
+							<tr><th>Why</th><td>you</td><td>do?</td><td>どうして</td></tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<h2>名詞・代名詞</h2>
+			<p>性、冠詞、所有格以外の格は存在しません。</p>
+			<div>
+				<h3>複数形</h3>
+				<p>単数形に接尾辞-qlsをつけることで表現しますが、分かち書きする場合としない場合があり、一部-sで複数形とする場合があります。</p>
+				<div>
+					<table>
+						<tr><td>Krey</td><th>Wizladeneqls</th><td>end</td><td>Yien</td><td>Senju a Telly</td><td>Eitilait.</td><td><i>-Popcorns Falling from Heaven</i></td></tr>
+						<tr><td>Tiny</td><th>actors</th><td>who</td><td>are</td><td>sent out</td><td>continuously.</td><td>次々と送り出されていく 小さな演者たち</td></tr>
+					</table>
+					<table>
+						<tr><td>Ogrejmea</td><th>Graid qls</th><td>end</td><td>Mii</td><td>Ranya Doe</td><td>folme</td><td>Ark</td><td>Sphiep</td><td><i>-Kill My Fortune</i></td></tr>
+						<tr><td>Adominable</td><th>memories</th><td>which</td><td>I</td><td>look down</td><td>from</td><td>celestial</td><td>sphere</td><td>天球から見下ろす 忌まわしい記憶たち</td></tr>
+					</table>
+					<table>
+						<tr><td>Hor</td><td>Pllardki</td><th>Vinshellms</th><td><i>-Give Me a Nightmare</i></td></tr>
+						<tr><td>Hey</td><td>Great</td><th>Nightmares</th><td>素晴らしい悪夢たちよ</td></tr>
+					</table>
+				</div>
+				<h3>代名詞</h3>
+				<div>
+					<table class=fixed>
+						<tr><th>人称</th><td>I</td><td>You</td><td>He</td><td>We</td><td>You</td><td>They</td><td>(I)</td><td>(You)</td><td>Who</td></tr>
+						<tr><th>主格・目的格</th><td>Mii</td><td>Crai</td><td></td><td>Mill</td><td>Craill</td><td></td><td>Zia</td><td>Cloud</td><td>Blem</td></tr>
+						<tr><th>所有格</th><td>Myte</td><td>Crait</td><td>Fijnyaditt</td><td>Millte</td><td></td><td></td><td>Zyte</td><td>Cloudyte</td><td>Blemyte</td></tr>
+					</table>
+				</div>
+				<h3>指示詞</h3>
+				<div>
+					<table class=fixed>
+						<tr><td>この</td><td>その</td><td>あの</td><td>かの</td></tr>
+						<tr><td>Bis</td><td>Xia</td><td>Twiik</td><td>Xaiti</td></tr>
+					</table>
+				</div>
+				<h3>一般名詞</h3>
+				<div>
+					<table class=fixed>
+						<tr><td>人</td><td>人々</td><td>もの</td><td>場所</td><td>何か</td><td>何も</td><td>誰か</td><td>誰にも</td><td>みんな</td><td>どこか</td></tr>
+						<tr><td>One</td><td>Ones</td><td>thing</td><td>place</td><td>something</td><td>anything</td><td>someone</td><td>anyone</td><td>everyone</td><td>anywhere</td></tr>
+						<tr><td>Ene, Rak</td><td>Enes, Eneqls</td><td>Note</td><td>Oli</td><td>Olizenote</td><td>Zel Note</td><td>Olizes</td><td>Blemenes</td><td>Ollenes</td><td>Amblu</td></tr>
+					</table>
+				</div>
+				<h3>Brai</h3>
+				<p>中国語の「里」に対応するように「～の中」をちゃんと表現するための語としてBraiがあります。</p>
+				<div>
+					<table>
+						<tr><th>Imm Brai ou</th><td>Bis</td><td>Wendiak</td><td>Fei</td><td>end</td><td>ol</td><td>Yien</td><td>Dikteb</td><td>Ord</td><td>Olizenote.</td><td><i>-Urxbxrxs</i></td></tr>
+						<tr><th>In</th><td>this</td><td>huge</td><td>circle</td><td>which</td><td>have</td><td>been</td>created<td></td><td>by</td><td>something.</td><td>何かによって構築された この巨大な輪の中で</td></tr>
+					</table>
+					<table>
+						<tr><td>ied</td><td>Peitim</td><td>Xia</td><td>Eilent</td><th>il Brai ou</th><td>Droq.</td><td><i>-Give Me a Nightmare</i></td></tr>
+						<tr><td>Allow</td><td>pack</td><td>that</td><td>mortification</td><th>in</th><td>bag.</td><td>その悔しさをカバンに詰め込んで</td></tr>
+					</table>
+				</div>
+			</div>
+			<h2>動詞・助動詞</h2>
+			<p>動詞の活用はなく、相、態は助動詞を用いて表現します。</p>
+			<div>
+				<h3>句動詞</h3>
+				<p>V1 a V2の形で句動詞を作ります。</p>
+				<div>
+					<table>
+						<tr><td>Polt</td><td>Pray</td><td>ou</td><td>Olizes</td><th>Selfe a Geeg.</th><td><i>-▷NEW GAME</i></td></tr>
+						<tr><td>Foot</td><td>sound</td><td>of</td><td>someone</td><th>don't stop.</th><td>何者かの 足音が鳴り止まない</td></tr>
+					</table>
+					<table>
+						<tr><td>Fotzob Miistiel</td><th>Luan a Yien Hiip a Tigalm.</th><td><i>-Fushigi Chan</i></td></tr>
+						<tr><td>My self-portrait</td><th>is being painted over.</th><td>自画像が塗りつぶされていく</td></tr>
+					</table>
+				</div>
+				<p>Hols a V（want to V）, V a Geeg（keep V-ing）などよく使われる組み合わせも多いです。</p>
+				<div>
+					<table>
+						<tr><td>Nai</td><th>Hols a Arth</th><td>weil</td><td>Bistie</td><td>Oli</td><td>Bai.</td><td><i>-Fushigi Chan</i></td></tr>
+						<tr><td>(I do) Not</td><th>want to be</th><td>in</td><td>such</td><td>place</td><td>anymore.</td><td>もうこんな所にいたくないよ</td></tr>
+					</table>
+					<table>
+						<tr><td>Phina</td><th>Hols a Skeem</th><td>Irdliq,</td><td>Gout...</td><td><i>-Kill My Fortune</i></td></tr>
+						<tr><td>(I) Shall</td><th>want to start</th><td>judgment,</td><td>but...</td><td>審判を始めたいところですが…</td></tr>
+					</table>
+					<table>
+						<tr><td>Missile</td><td>end</td><th>Cliid a Geeg.</th><td><i>-Chocolate Missile</i></td></tr>
+						<tr><td>Missile</td><td>which</td><th>keep falling.</th><td>降り注ぐミサイル</td></tr>
+					</table>
+				</div>
+				<h3>助動詞</h3>
+				<div>
+					<h4>iy, o</h4>
+					<h4>完了のol</h4>
+					<h4>過去完了のob</h4>
+					<h4>受動態のYien, Yiend</h4>
+					<h4>命令のPhier, Phim, Yiela, Yiep</h4>
+					<h4>可能のKulu</h4>
+					<h4>義務のOlzy</h4>
+					<h4>必要のIeha</h4>
+					<h4>Vell</h4>
+					<h4>Leste, Lishe</h4>
+				</div>
+			</div>
+			<h2>形容詞・副詞</h2>
+			<div>
+				<h3>前置修飾</h3>
+				<p>
+					基本的には形容詞を名詞の前に置いて修飾する前置修飾が一般的ですが、一部後置修飾と見られる文も存在します。<br>
+				</p>
+				<table>
+					<tr><th>Veit</th><th>Syarfi</th><td><i>-A Little Servant</i></td></tr>
+					<tr><th>Red</th><th>dress</th><td>赤いドレス</td></tr>
+				</table>
+				<table>
+					<tr><td>Bis</td><th>Krey</th><th>Paphileeta</th><td>Vell</td><td>Ignai</td><td>Verse.</td><td><i>-Psukhe</i></td></tr>
+					<tr><td>This</td><th>tiny</th><th>universe</th><td>will</td><td>never</td><td>disappear.</td><td>この小さな宇宙は消えることはない</td></tr>
+				</table>
+				<table>
+					<tr><td>Ritto<td>a</td><td>Graid</td><th>Haol</th><th>Xia.</th><td><i>-Teardrop del Rey</i></td></tr>
+					<tr><td>Bounce<td></td><td>memory</td><th>hand</th><th>that.</th><td>*記憶をその手で弾け</td></tr>
+				</table>
+				<h3>動詞→形容詞</h3>
+				<p>語尾に-tもしくは-itを付けます。</p>
+				<h3>形容詞→副詞</h3>
+				<p>語尾に-laitを付けます。</p>
+				<div>
+					<table>
+						<tr><td>Wendit</td><td>Lusia</td><td>Entie</td><td>Arch</td><td>Synapse</td><td>il</td><th>Eiti</th><td>Minelu</td><td><i>-Urxbxrxs</i></td></tr>
+						<tr><td>Swimming</td><td>light</td><td>ride</td><td>on</td><td>synapse</td><td>to</td><th>next</th><td>star.</td><td>泳ぐ光は シナプスに乗り 次の星へ</td></tr>
+						<tr><td>Krey</td><td>Wizladeneqls</td><td>end</td><td>Yien</td><td>Senju a Telly</td><th>Eitilait</th><td></td><td></td><td><i>-Popcorns Falling from Heaven</i></td></tr>
+						<tr><td>Tiny</td><td>actors</td><td>who</td><td>are</td><td>sent out</td><th>continuously.</th><td></td><td></td><td>次々と送り出されていく 小さな演者たち</td></tr>
+					</table>
+					<table>
+						<tr><td>Mii</td><td>Rinasia a Canvie</td><td>lid</td><th>Dooom</th><td>Nouche</td><td></td><td><i>-Hypnotyzed</i></td></tr>
+						<tr><td>I</td><td>am reborn</td><td>at</td><th>deep</th><td>night.</td><td></td><td>真夜中に 私は生まれ変わる</td></tr>
+						<tr><td>Antakt</td><td>il</td><td>Pliphasoil</td><td>en</td><td>Wely</td><th>Dooomlait</th><td><i>-FEHLT</i></td></tr>
+						<tr><td>Dive</td><td>to</td><td>test tube</td><td>and</td><td>sink</td><th>deeply.</th><td>試験管に潜って 深く沈む</td></tr>
+					</table>
+				</div>
+				<h3>副詞</h3>
+				<div>
+					<h4>osa</h4>
+					<h4>Mols</h4>
+					<h4>Poul ail</h4>
+				</div>
+			</div>
+			<h2>接続詞・前置詞</h2>
+			<div>
+				<h3>接続詞</h3>
+				<div>
+					<h4>文章をつなぐa,es,en,end</h4>
+					<h4>形容詞節を作るend</h4>
+					<h4>名詞節を作るRa</h4>
+					<h4>条件節を作るIjlim,Poutie,Tozlom,Poetolt,Poetklar,Imeila,forle</h4>
+					<h4>Elize</h4>
+					<h4>Iequim</h4>
+					<h4>Gout</h4>
+					<h4>Elie</h4>
+				</div>
+				<h3>前置詞</h3>
+				<div>
+					<h4>Arch</h4>
+					<h4>Lef</h4>
+					<h4>a</h4>
+					<h4>ieq</h4>
+					<h4>ou</h4>
+					<h4>lid</h4>
+					<h4>tie</h4>
+					<h4>Ifa</h4>
+					<h4>weil</h4>
+					<h4>lar</h4>
+					<h4>folme</h4>
+					<h4>imm</h4>
+					<h4>il</h4>
+					<h4>Ord</h4>
+				</div>
+			</div>
+		</div>
 	</body>
 	<script>
 		const elem=(id)=>document.getElementById(id);
@@ -110,7 +433,7 @@
 							)
 						)
 					)
-				).map(val=>"<tr><th>"
+				).map(val=>"<tr><th nowrap>"
 					+val.name+"</th><td>"
 					+((id==="alc")?val.alc.replace(value,"<b>"+value+"</b>"):val.alc)+"</td><td>"
 					+((id==="eng")?val.eng.replace(value,"<b>"+value+"</b>"):val.eng)+"</td><td>"
@@ -120,7 +443,7 @@
 		};
 		const start=()=>{
 			elem("name_l").innerHTML=raw.map(val=>"<option value='"+val.name+"'></option>");
-			elem("credit").innerHTML="<tr><th>Song</th><th>Alician</th><th>English</th><th>Japanese</th></tr>"+raw.map(val=>"<tr><td>"+val.name+"</td>"
+			elem("origin").innerHTML="<tr><th>Song</th><th>Alician</th><th>English</th><th>Japanese</th></tr>"+raw.map(val=>"<tr><td>"+val.name+"</td>"
 				+"<td><a target='_blank' href='"+val.origin.alc.url+"'>"+val.origin.alc.text+"</a></td>"
 				+"<td><a target='_blank' href='"+val.origin.eng.url+"'>"+val.origin.eng.text+"</a></td>"
 				+"<td><a target='_blank' href='"+val.origin.jpn.url+"'>"+val.origin.jpn.text+"</a></td></tr>"
@@ -904,7 +1227,7 @@
 				alc:[
 					"Mii Nai Dilem Harla Bai",
 					"Finz Taz Joul Elay",
-					"imeila Tiag Myahalke, Vell Ignai Deet",
+					"Imeila Tiag Myahalke, Vell Ignai Deet",
 
 					"Xia Nai Arth Amblu,",
 					"Foul Vell Kulu Nai Rait",
@@ -2058,8 +2381,8 @@
 				],
 				alc:[
 					"Hellmeila Hellmeila",
-					"Iar imm Miis Mols",
-					"Finzo a Fiola end ol Melnaid",
+					"Iar imm Miis Mols Finzo",
+					"a Fiola end ol Melnaid",
 					"Veit Syarfi",
 					"Oul Solien",
 					"Vala ou Quondlea",
@@ -3122,14 +3445,14 @@
 			"Akaite,液,fluid,noun,",
 			"Alan,,,,",
 			"Aldaltia,,,,",
-			"Alfloul,包み込む,envelope,verb,",
+			"Alfloul,～の周りに,around,preposition,",
 			"Alger,,,,",
 			"Alista,,,,",
 			"Allss,瞼,eyelid,noun,",
 			"Alvete,,,,",
 			"Amabell,ようやく,finally at last,adverb,",
 			"Amblait,強く,strongly,adverb,",
-			"Amblu,どこ,#NAME?,noun,",
+			"Amblu,どこでも,anywhere,noun,",
 			"Ame,こども,child,noun,",
 			"Amejdimer,胎児,fetus,noun,",
 			"Amie,愛,love,noun,",
@@ -3165,7 +3488,7 @@
 			"Awte,,,,",
 			"Awter,会う,meet,verb,",
 			"Bai,もう,anymore,adverb,",
-			"Baly,いつも,usual,adjective,",
+			"Baly,いつも,always,adverb,",
 			"Belqua,入れる,,verb,",
 			"Belzebav,ベルゼブブ,Beelzebub,noun,",
 			"Berte,山積み,pile,noun,",
@@ -3175,7 +3498,7 @@
 			"Bipeidit,蠢いている,wriggling,adjective,",
 			"Bis,この,this,adjective,",
 			"Bisoli,ここ,here,noun,",
-			"Bistie,こんなところ,this place,noun,",
+			"Bistie,こんな,such,adjective attributive,",
 			"Blawpelee,ポップコーン,popcorn,noun,",
 			"Blem,誰,who,interrogative pronoun,",
 			"Blemenes,誰にも,everyone,pronoun,",
@@ -3213,7 +3536,6 @@
 			"Craill,君たち,you,pronoun,",
 			"Crain,君,you,pronoun,",
 			"Crait,君の,your,pronoun possessive,",
-			"Crrai,君,you,pronoun,",
 			"Dal,～でいる,stay,verb,",
 			"Dangli,,,,",
 			"Darlitte,ショー,show,noun,",
@@ -3268,7 +3590,7 @@
 			"Efa,時代,age,noun,",
 			"Efiitlaw,晩餐会,dinner party,noun,",
 			"Efitu,食べる,eat,verb,",
-			"Efituyur,食べていただく,<polite>eat,verb transitive,",
+			"Efituyur,食べていただく,(polite)eat,verb transitive,",
 			"Efok,咳,cough,noun,",
 			"Egdrea,祀る,worship,verb,",
 			"Eid,動く,proceed,verb,",
@@ -3306,14 +3628,14 @@
 			"Emsa,～粒,drop,numeral quantifier,",
 			"en,～して,then,adverb,",
 			"end,～する,which,relative pronoun,",
-			"Endaqlt,,<future>,auxiliary verb,",
+			"Endaqlt,,(future),auxiliary verb,",
 			"Endekta,,,,",
 			"Endjulf,そうして,thus,adverb,",
 			"Endroll,エンドロール,ending celebration,noun,",
 			"Endyd,,,,",
 			"Ene,人,one,pronoun,",
 			"Enebis,人,human,noun,",
-			"Eneqls,もの,thing,pronoun,",
+			"Eneqls,人々,ones,pronoun,",
 			"Enes,人々,ones,pronoun,",
 			"Enquif,,,,",
 			"Ensloadivi,妖精,fairy,noun,",
@@ -3381,7 +3703,7 @@
 			"Finz,終わり,end,noun,ITL fine",
 			"Finza,出口,exit,noun,",
 			"Finzie,終わらせる,end,verb,",
-			"Finzo,,,,",
+			"Finzo,フィナーレ,finale,noun,",
 			"Fiola,花,flower,noun,",
 			"Fiolaza,花束,bouquet,noun,",
 			"Fiqqlait,よく,well,adverb,",
@@ -3504,7 +3826,7 @@
 			"Ilfelie,亡霊,ghost,noun,",
 			"Ilis,虹,rainbow,noun,",
 			"Ilqum,儀式,ritual,noun,",
-			"imeila,～しても,even if,conjunction,",
+			"Imeila,～しても,even if,conjunction,",
 			"Imiyl,抜ける,go through,verb,",
 			"Imiylt,抜けた,going through,adjective attributive,",
 			"imm,～に,in,preposition,",
@@ -3514,11 +3836,11 @@
 			"Invalda,召還,summon,noun,",
 			"Ipsi,腕,arm,noun,",
 			"Iqyul,聖なる,sacred,adjective,",
-			"Iqyur,,<polite>,adjective attributive,",
+			"Iqyur,,(polite),adjective attributive,",
 			"irdliq,審判,judgment,noun,",
 			"Isbalg,,,,",
 			"Ixche,名,name,noun,",
-			"iy,～は,is,verb,",
+			"iy,,(copula),verb intransitive,",
 			"Jac,乾く,dry up,verb,",
 			"Jam,悩む,worry,verb intransitive,",
 			"Jay,悲しい,sad,adjective,",
@@ -3563,7 +3885,7 @@
 			"Laidiik,かける,cast,verb transitive,",
 			"Laidiik Mage,魔法をかける,cast a spell,verb phrasal,",
 			"Laila,鳥,bird,noun,",
-			"lait,,<adjective to adverb>,,",
+			"lait,,(adjective to adverb),,",
 			"Laiz,未来,future,noun,",
 			"Laizcall,鐘,bell,noun,",
 			"Laiziin,,,,",
@@ -3587,7 +3909,7 @@
 			"Leimyt,放された,releasing,adjective,",
 			"Lein,照らす,shine,verb,",
 			"len,,,,",
-			"Lend,～しますか,<Polite Question>,auxiliary verb,",
+			"Lend,～しますか,(Polite Question),auxiliary verb,",
 			"Lenekle,ストーリー,plot line,noun,",
 			"Leste,さあ,Let's,auxiliary verb,",
 			"Ley,続く,last,verb intransitive,",
@@ -3688,7 +4010,7 @@
 			"Niims,過去,preterite,noun,",
 			"Nilai,霧,fog,noun,",
 			"Nita,夏,summer,noun,",
-			"no,,,,",
+			"no,ひとつも～ない,no,numeral number,",
 			"Noa,無,non,adverb,",
 			"Noablem,誰一人～ない,no one,pronoun,",
 			"Noaflea,何も無い,nothing,pronoun,",
@@ -3696,8 +4018,8 @@
 			"Nols,数,number,noun,",
 			"Note,何か,anything,pronoun,",
 			"Nouche,夜,night,noun,",
-			"o,,<copula>,auxiliary verb,",
-			"ob,,<past perfect>,auxiliary verb,",
+			"o,,(copula),verb intransitive,",
+			"ob,,(past perfect),auxiliary verb,",
 			"occia,,,,",
 			"Ofa,撤回,withdraw,noun,",
 			"Ofelnti,プランクトン,plankton,noun,",
@@ -3706,16 +4028,15 @@
 			"Oh,,,,",
 			"Ojdikkart,呪い,curse,noun,",
 			"Okititil,教化,edification,noun,",
-			"ol,～した,<perfect>,auxiliary verb,",
+			"ol,～した,(perfect),auxiliary verb,",
 			"Ola,空の,empty,adjective,",
 			"Olaio,元通り,before,adjective,",
 			"Olca,,,,",
 			"olfe,,,,",
 			"Olfeis,,,,",
 			"Oli,場所,place,noun,",
-			"Oliend,ところ,where,relative adverb,",
 			"Olipha,行き場,the way,noun,",
-			"Olis,とても,so,adverb,",
+			"Olis,とても,very,adverb,",
 			"Olista,溢れる,overflow,verb,",
 			"Olistea,とても,so,adverb,",
 			"Olizenote,何か,something,pronoun,",
@@ -3743,9 +4064,9 @@
 			"Pelto,記録,record,noun,",
 			"Perte,,,,",
 			"Phida,歪み,distortion,noun,",
-			"Phier,～してください,please,auxiliary verb,",
-			"Phim,～してよ,please,auxiliary verb,",
-			"Phina,～します,,auxiliary verb,",
+			"Phier,～してください,(imperative),auxiliary verb,",
+			"Phim,～してよ,(imperative),auxiliary verb,",
+			"Phina,～します,shall,auxiliary verb,",
 			"Phinglasene,理想論者,idealist,noun,",
 			"Piala,清純な,pure,adjective,",
 			"Piero,ピエロ,clown,noun,",
@@ -3766,6 +4087,7 @@
 			"Plousa,～回,time,numeral quantifier,",
 			"Poa,,,,",
 			"Poet,する,do,verb transitive,",
+			"Poet Nai,しないで,don't,auxiliary verb imperative",
 			"Poetklar,～しながら,while,conjunction,",
 			"Poetolt,～しながら,while,conjunction,",
 			"Polt,足,foot,noun,",
@@ -3773,7 +4095,7 @@
 			"Porta,船,ship,noun,ENG port",
 			"Poul,,,,",
 			"Poul ail,結局,after all,adverb,",
-			"Poutie,～したら,when,conjunction,",
+			"Poutie,～したら,when after,conjunction,",
 			"Prai a Cliid,降り注ぐ,fall,verb phrasal,",
 			"Pray,音,sound,noun,",
 			"Preparat,プレパラート,preparation,noun,",
@@ -3788,7 +4110,7 @@
 			"Qleea,～してしまう,,auxiliary verb,",
 			"Qleel,,,,",
 			"Qlittit,ひび割れた,cracked,adjective attributive,",
-			"qls,～たち,<plural>,,",
+			"qls,～たち,(plural),,",
 			"Qtua,,,,",
 			"Qualda,刺激,stimulation,noun,",
 			"Queit,,,,",
@@ -3847,7 +4169,6 @@
 			"Selfe,鳴る,ring,verb,",
 			"Selti,,,,",
 			"Senju,送る,send,verb transitive,",
-			"Senju a Telly,送り出す,send out,verb phrasal,",
 			"Senju a Telly,送り出す,send out,verb phrasal,",
 			"Shay,水,water,noun,",
 			"She,,,,",
@@ -3994,7 +4315,7 @@
 			"Wery,,,,",
 			"Whiil,白い,white,adjective,",
 			"Wiina,眠り,sleep,noun,",
-			"Wilenq,なんて,<exclamation>,interjection,",
+			"Wilenq,なんて,(exclamation),interjection,",
 			"Will,鼓動,heartbeat,noun,",
 			"Wimb,,,,",
 			"Winde,,,,",
@@ -4014,11 +4335,11 @@
 			"Xianya,彼ら,they,pronoun,",
 			"Xiaoli,,,,",
 			"Ya,～かい,,interjection,",
-			"Yiela,～しなさい,<imperative>,auxiliary verb,",
+			"Yiela,～しなさい,(imperative),auxiliary verb,",
 			"Yiele,,,,",
-			"Yien,～される,<passive>,auxiliary verb,",
-			"Yiend,～される,<passive>,auxiliary verb,",
-			"Yiep,～せよ,<imperative>,auxiliary verb,",
+			"Yien,～される,(passive),auxiliary verb,",
+			"Yiend,～される,(passive),auxiliary verb,",
+			"Yiep,～せよ,(imperative),auxiliary verb,",
 			"Yulleia,ゆっくりと,slowly,adverb,",
 			"Yullk,,,,",
 			"yur,,,,",
@@ -4036,7 +4357,13 @@
 			"Ziok,雷,thunder,noun,",
 			"Ziokla,雷鳥,thunderbird ptarmigan,noun,",
 			"Zote,季節,season,noun,",
-			"Zyte,僕の,my,pronoun possessive,"
+			"Zyte,僕の,my,pronoun possessive,",
+			"Aasye a Luan,立ち昇る,rise up,verb phrasal,",
+			"Hols a V,～したい,want to V,verb phrasal,",
+			"Luan a Yien Hiip a Tigalm,塗りつぶされていく,is painted over,verb phrasal,",
+			"Peil a Dist,置き忘れる,leave after,verb phrasal,",
+			"Clooshe a Toubi,閉じて開ける,blink,verb phrasal,",
+			"V a Geeg,～し続ける,keep V-ing,verb phrasal,",
 		].map(val=>{
 			const arr=val.split(",");
 			return {
